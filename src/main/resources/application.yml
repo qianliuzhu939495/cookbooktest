@@ -1,0 +1,32 @@
+
+pic:
+  webPath: /images/
+  savePath: E:\school\java\SpringBoot\springBoot06\src\main\resources\videos
+
+#spring boot 默认文件上传大小
+spring:
+  servlet:
+    multipart:
+      max-request-size: 200MB
+      max-file-size: 200MB
+  resources:
+    static-locations: classpath:/META- INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/jsp/,classpath:/js/,classpath:/videos/
+  datasource:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cookbook
+    username: root
+    password: admin
+server:
+  port: 8080
+  servlet:
+    context-path: /springBoot06
+  thymeleaf:
+    # encoding: UTF-8
+    # prefix: classpath:/templates/
+    # suffix: .html
+    mode: HTML5  # 视图模型
+    cache: false # 模板缓存
+
+logging:
+  level: com.cookbook.dao.*=debug
