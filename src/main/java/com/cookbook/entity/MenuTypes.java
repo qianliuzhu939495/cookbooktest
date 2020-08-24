@@ -7,12 +7,22 @@ public class MenuTypes {
     private Integer Mtid;
     private String Mtname;
     private Integer mLevel;
+    private List<MenuTypes> menutypess;
 private List<Menu> menus;
 
-    public MenuTypes(Integer mtid, String mtname, Integer mLevel, List<Menu> menus) {
+    public List<MenuTypes> getMenutypess() {
+        return menutypess;
+    }
+
+    public void setMenutypess(List<MenuTypes> menutypess) {
+        this.menutypess = menutypess;
+    }
+
+    public MenuTypes(Integer mtid, String mtname, Integer mLevel, List<MenuTypes> menutypess, List<Menu> menus) {
         Mtid = mtid;
         Mtname = mtname;
         this.mLevel = mLevel;
+        this.menutypess = menutypess;
         this.menus = menus;
     }
 
