@@ -24,7 +24,7 @@ public class CorsConfig {
         // 允许的域名
          //corsConfiguration.addAllowedOrigin("http://localhost:8088/");
         // corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:8080","http://localhost:8088"));
+        corsConfiguration.addAllowedOrigin("*");
         // 允许的请求头
         corsConfiguration.addAllowedHeader("*");
         // 允许请求方式

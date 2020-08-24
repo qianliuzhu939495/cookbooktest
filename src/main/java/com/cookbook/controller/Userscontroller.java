@@ -38,6 +38,7 @@ public class Userscontroller {
     @RequestMapping("queryAll")
     @ResponseBody
     public List<Users> queryAll(){
+        System.out.println("s");
         return userService.queryAll();
     }
     @RequestMapping("queryMsg")
