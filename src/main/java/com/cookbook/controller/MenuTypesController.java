@@ -17,7 +17,6 @@ public class MenuTypesController {
     MenuTypesService menuTypesService;
     @RequestMapping("queryall")
     public List<MenuTypes> queryall(){
-        System.out.println(1);
         return menuTypesService.queryall();
     }
 }

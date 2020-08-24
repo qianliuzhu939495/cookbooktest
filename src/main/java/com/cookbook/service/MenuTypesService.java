@@ -15,7 +15,7 @@ public class MenuTypesService {
     public List<MenuTypes> queryall(){
         List<MenuTypes> menuTypes = menuTypesDao.querybymlevel(0);
         for (MenuTypes menutype:menuTypes){
-            List<MenuTypes> menutwo = menuTypesDao.querybymlevel(menutype.getmLevel());
+            List<MenuTypes> menutwo = menuTypesDao.querybymlevel(menutype.getMtid());
             menutype.setMenutypess(menutwo);
         }
         return menuTypes;
