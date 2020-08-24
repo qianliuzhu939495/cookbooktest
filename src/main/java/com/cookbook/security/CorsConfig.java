@@ -1,3 +1,4 @@
+/*
 package com.cookbook.security;
 
 import org.springframework.context.annotation.Bean;
@@ -8,9 +9,11 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
+*/
 /**
  * 配置跨域配置
- */
+ *//*
+
 @Configuration
 public class CorsConfig {
 
@@ -39,3 +42,4 @@ public class CorsConfig {
     }
 
 }
+*/
