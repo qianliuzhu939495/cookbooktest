@@ -27,6 +27,3 @@ server:
     # suffix: .html
     mode: HTML5  # 视图模型
     cache: false # 模板缓存
-
-logging:
-  level: com.cookbook.dao.*=debug
