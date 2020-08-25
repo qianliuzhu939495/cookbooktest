@@ -2,7 +2,6 @@ package com.cookbook.service;
 
 import com.cookbook.dao.UserDao;
 import com.cookbook.entity.Users;
-import com.cookbook.util.sms_util;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
