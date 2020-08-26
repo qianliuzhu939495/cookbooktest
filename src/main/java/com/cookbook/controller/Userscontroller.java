@@ -13,6 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @Controller
+
 public class Userscontroller {
     @Resource
     UserService userService;
@@ -46,4 +47,5 @@ public class Userscontroller {
     public Users queryMsg(){
         return userService.queryByMsg("17633603531","OK");
     }
+
 }

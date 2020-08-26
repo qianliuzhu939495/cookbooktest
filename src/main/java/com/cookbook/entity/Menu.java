@@ -16,10 +16,20 @@ public class Menu {
     private List<MaterialsDetail> materialsDetails; // 用料
     private List<Works> works; //翻拍的作品
     private  List<LeavMessage> leavMessages;
+    private Users users;
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
     public Menu() {
     }
 
-    public Menu(Integer mid, String mname, String pic, String info, Integer mtid, Integer state, Integer uid, Date madeTime, List<MenuStep> menuSteps, List<MaterialsDetail> materialsDetails, List<Works> works, List<LeavMessage> leavMessages) {
+    public Menu(Integer mid, String mname, String pic, String info, Integer mtid, Integer state, Integer uid, Date madeTime, List<MenuStep> menuSteps, List<MaterialsDetail> materialsDetails, List<Works> works, List<LeavMessage> leavMessages,Users users) {
         Mid = mid;
         Mname = mname;
         Pic = pic;
@@ -32,6 +42,7 @@ public class Menu {
         this.materialsDetails = materialsDetails;
         this.works = works;
         this.leavMessages = leavMessages;
+        this.users=users;
     }
 
     public Integer getMid() {
@@ -145,6 +156,7 @@ public class Menu {
                 ", materialsDetails=" + materialsDetails +
                 ", works=" + works +
                 ", leavMessages=" + leavMessages +
+                ", user=" + users +
                 '}';
     }
 }

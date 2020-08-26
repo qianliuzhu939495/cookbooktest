@@ -17,4 +17,9 @@ public interface UserDao {
     Integer sasveone(String phone);
     @Select("select * from users")
     List<Users> queryAll();
+    @Select("select * from users where uid=#{uid}")
+    Users querybyid(Integer uid);
+    //查询关注人
+    @Select("select u.* from User_User uu LEFT JOIN users u on u.uid=uu.followuid where uu.uid=#{uid}")
+    List<Users> queryguanzhu(Integer uid);
 }

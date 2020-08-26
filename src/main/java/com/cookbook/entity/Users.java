@@ -15,6 +15,7 @@ public class Users {
     private Date Birthday;
     private Date createTime;
     private Integer state;
+    private List<Menu> munus;//创建的菜谱
     private List<Works> works;
     private  List<User_menu> user_menus; //用户收藏菜单
     private List<User_studio> user_studios; // 收藏课程
@@ -23,7 +24,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(Integer uid, String access_token, String uname, String pwd, String phone, String pic, String selfinfo, Integer sex, Date birthday, Date createTime, Integer state, List<Works> works, List<User_menu> user_menus, List<User_studio> user_studios, List<Users> users, List<Users> follows) {
+    public Users(Integer uid, String access_token, String uname, String pwd, String phone, String pic, String selfinfo, Integer sex, Date birthday, Date createTime, Integer state, List<Menu> munus, List<Works> works, List<User_menu> user_menus, List<User_studio> user_studios, List<Users> users, List<Users> follows) {
         this.uid = uid;
         this.access_token = access_token;
         this.uname = uname;
@@ -35,11 +36,20 @@ public class Users {
         Birthday = birthday;
         this.createTime = createTime;
         this.state = state;
+        this.munus = munus;
         this.works = works;
         this.user_menus = user_menus;
         this.user_studios = user_studios;
         this.users = users;
         this.follows = follows;
+    }
+
+    public List<Menu> getMunus() {
+        return munus;
+    }
+
+    public void setMunus(List<Menu> munus) {
+        this.munus = munus;
     }
 
     public Integer getUid() {
@@ -184,6 +194,7 @@ public class Users {
                 ", Birthday=" + Birthday +
                 ", createTime=" + createTime +
                 ", state=" + state +
+                ", munus=" + munus +
                 ", works=" + works +
                 ", user_menus=" + user_menus +
                 ", user_studios=" + user_studios +
