@@ -1,35 +1,17 @@
 package com.cookbook.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class User_studio {
-    private Integer uid;
-    private Integer Sid;
     private Date SaveTime;
-
+    private List<Studio> studioList;
     public User_studio() {
     }
 
-    public User_studio(Integer uid, Integer sid, Date saveTime) {
-        this.uid = uid;
-        Sid = sid;
+    public User_studio(Date saveTime, List<Studio> studioList) {
         SaveTime = saveTime;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public Integer getSid() {
-        return Sid;
-    }
-
-    public void setSid(Integer sid) {
-        Sid = sid;
+        this.studioList = studioList;
     }
 
     public Date getSaveTime() {
@@ -40,12 +22,19 @@ public class User_studio {
         SaveTime = saveTime;
     }
 
+    public List<Studio> getStudioList() {
+        return studioList;
+    }
+
+    public void setStudioList(List<Studio> studioList) {
+        this.studioList = studioList;
+    }
+
     @Override
     public String toString() {
         return "User_studio{" +
-                "uid=" + uid +
-                ", Sid=" + Sid +
-                ", SaveTime=" + SaveTime +
+                "SaveTime=" + SaveTime +
+                ", studioList=" + studioList +
                 '}';
     }
 }

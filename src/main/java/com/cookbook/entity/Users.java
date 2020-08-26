@@ -21,10 +21,11 @@ public class Users {
     private List<User_studio> user_studios; // 收藏课程
     private List<Users>  users; //关注的人
     private List<Users>  follows; //被关注的人
+    private List<Studio> mystudio; //我发布的课程
+    private List<Studio> paystudio; //我购买的课程
     public Users() {
     }
-
-    public Users(Integer uid, String access_token, String uname, String pwd, String phone, String pic, String selfinfo, Integer sex, Date birthday, Date createTime, Integer state, List<Menu> munus, List<Works> works, List<User_menu> user_menus, List<User_studio> user_studios, List<Users> users, List<Users> follows) {
+    public Users(Integer uid, String access_token, String uname, String pwd, String phone, String pic, String selfinfo, Integer sex, Date birthday, Date createTime, Integer state, List<Menu> munus, List<Works> works, List<User_menu> user_menus, List<User_studio> user_studios, List<Users> users, List<Users> follows, List<Studio> mystudio, List<Studio> paystudio) {
         this.uid = uid;
         this.access_token = access_token;
         this.uname = uname;
@@ -42,14 +43,8 @@ public class Users {
         this.user_studios = user_studios;
         this.users = users;
         this.follows = follows;
-    }
-
-    public List<Menu> getMunus() {
-        return munus;
-    }
-
-    public void setMunus(List<Menu> munus) {
-        this.munus = munus;
+        this.mystudio = mystudio;
+        this.paystudio = paystudio;
     }
 
     public Integer getUid() {
@@ -140,6 +135,14 @@ public class Users {
         this.state = state;
     }
 
+    public List<Menu> getMunus() {
+        return munus;
+    }
+
+    public void setMunus(List<Menu> munus) {
+        this.munus = munus;
+    }
+
     public List<Works> getWorks() {
         return works;
     }
@@ -180,6 +183,22 @@ public class Users {
         this.follows = follows;
     }
 
+    public List<Studio> getMystudio() {
+        return mystudio;
+    }
+
+    public void setMystudio(List<Studio> mystudio) {
+        this.mystudio = mystudio;
+    }
+
+    public List<Studio> getPaystudio() {
+        return paystudio;
+    }
+
+    public void setPaystudio(List<Studio> paystudio) {
+        this.paystudio = paystudio;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
@@ -200,6 +219,8 @@ public class Users {
                 ", user_studios=" + user_studios +
                 ", users=" + users +
                 ", follows=" + follows +
+                ", mystudio=" + mystudio +
+                ", paystudio=" + paystudio +
                 '}';
     }
 }

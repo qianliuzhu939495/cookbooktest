@@ -1,5 +1,6 @@
 package com.cookbook.service;
 import com.cookbook.dao.MenuDao;
+import com.cookbook.dao.StudioOrder;
 import com.cookbook.dao.UserDao;
 import com.cookbook.dao.WorksDao;
 import com.cookbook.entity.Menu;
@@ -18,8 +19,23 @@ public class UserService {
     MenuDao menuDao;
     @Resource
     WorksDao worksDao;
+    @Resource
+    StudioOrder studioOrder;
     public Users quryByPwd(String phone, String pwd){
-        return ud.queryByPwd(phone,pwd);
+        Users users = ud.queryByPwd(phone, pwd);
+        System.out.println(users);
+        if(null!=users) {
+            Integer uid = users.getUid();
+            users.setUsers(ud.queryguanzhu(uid));
+            users.setFollows(ud.querybeiguanzhu(uid));
+            users.setUser_menus(ud.queryLikemenu(uid));
+            users.setUser_studios(ud.queryLikestudios(uid));
+            users.setMunus(menuDao.querybyuid(uid));
+            users.setWorks(worksDao.querybyuid(uid));
+            users.setMystudio(studioOrder.queryBypay(uid));
+            users.setMystudio(studioOrder.queryByincome(uid));
+        }
+        return users;
     }
     public Users queryByphone(String phone){
         Users users = ud.queryByMsg(phone);
@@ -27,10 +43,29 @@ public class UserService {
             ud.sasveone(phone);
         }
         users = ud.queryByMsg(phone);
+        Integer uid = users.getUid();
+        users.setUsers(ud.queryguanzhu(uid));
+        users.setFollows(ud.querybeiguanzhu(uid));
+        users.setUser_menus(ud.queryLikemenu(uid));
+        users.setUser_studios(ud.queryLikestudios(uid));
+        users.setMunus(menuDao.querybyuid(uid));
+        users.setWorks(worksDao.querybyuid(uid));
+        users.setMystudio(studioOrder.queryBypay(uid));
+        users.setMystudio(studioOrder.queryByincome(uid));
         return users;
     }
     public Users queryByMsg(String phone){
-        return ud.queryByMsg(phone);
+        Users users = ud.queryByMsg(phone);
+        Integer uid = users.getUid();
+        users.setUsers(ud.queryguanzhu(uid));
+        users.setFollows(ud.querybeiguanzhu(uid));
+        users.setUser_menus(ud.queryLikemenu(uid));
+        users.setUser_studios(ud.queryLikestudios(uid));
+        users.setMunus(menuDao.querybyuid(uid));
+        users.setWorks(worksDao.querybyuid(uid));
+        users.setMystudio(studioOrder.queryBypay(uid));
+        users.setMystudio(studioOrder.queryByincome(uid));
+        return users;
 
     }
     public Integer sasveone(String phone){
@@ -54,4 +89,5 @@ public class UserService {
         }
         return users;
     }
+
 }

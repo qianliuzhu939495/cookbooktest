@@ -28,17 +28,18 @@ public class Userscontroller {
     @RequestMapping("quryByPwd")
     @ResponseBody
     public Users quryByPwd(@RequestBody Users users){
-        System.out.println(users);
         return userService.quryByPwd(users.getPhone(),users.getPwd());
     }
     @RequestMapping("queryByphone")
     @ResponseBody
     public Users queryByMsg(String phone,String Msg){
         System.out.println(phone+","+Msg);
+        System.out.println(String.valueOf(mobile_code)+""+Msg);
         if(String.valueOf(mobile_code)!=Msg){
             return null;
         }
         Users users = userService.queryByphone(phone);
+        System.out.println(users);
         if(users==null){
             userService.sasveone(phone);
         }
@@ -64,5 +65,4 @@ public class Userscontroller {
         System.out.println("s");
         return userService.queryAll();
     }
-
 }
