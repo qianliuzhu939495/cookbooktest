@@ -1,12 +1,12 @@
 package com.cookbook.service;
 
-import com.cookbook.dao.MenuDao;
 import com.cookbook.dao.UserDao;
 import com.cookbook.dao.WorksDao;
 import com.cookbook.entity.Menu;
 import com.cookbook.entity.Users;
 import com.cookbook.entity.Works;
 import com.cookbook.util.sms_util;
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,19 +24,22 @@ public class UserService {
         return ud.queryByPwd(phone,pwd);
     }
     public Users queryByphone(String phone){
-        return  ud.queryByMsg(phone);
-    }
-    public Users queryByMsg(String phone,String rs){
-        Users users=null;
-        if(rs.indexOf("OK")!=-1){
-            users =this.queryByphone(phone);
-            if(users==null){
-                ud.sasveone(phone);
-            }
+        Users users = ud.queryByMsg(phone);
+        if(null==users){
+            ud.sasveone(phone);
         }
-        users = this.queryByphone(phone);
-        System.out.println(users);
+        users = ud.queryByMsg(phone);
         return users;
+    }
+    public Users queryByMsg(String phone){
+        return ud.queryByMsg(phone);
+
+    }
+    public Integer sasveone(String phone){
+        return ud.sasveone(phone);
+    }
+    public Integer sasveoneRe(String pwd,String phone){
+        return ud.sasveoneRe(pwd,phone);
     }
     public List<Users> queryAll(){
         return ud.queryAll();
