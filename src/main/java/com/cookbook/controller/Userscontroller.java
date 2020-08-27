@@ -1,6 +1,8 @@
 package com.cookbook.controller;
 
+import com.cookbook.entity.Menu;
 import com.cookbook.entity.Users;
+import com.cookbook.entity.Works;
 import com.cookbook.service.UserService;
 import com.cookbook.util.Sms_util;
 import org.springframework.stereotype.Controller;
@@ -34,8 +36,7 @@ public class Userscontroller {
     @ResponseBody
     public Users queryByMsg(String phone,String Msg){
         System.out.println(phone+","+Msg);
-        System.out.println(String.valueOf(mobile_code)+""+Msg);
-        if(String.valueOf(mobile_code)!=Msg){
+        if(!String.valueOf(mobile_code).equals(Msg)){
             return null;
         }
         Users users = userService.queryByphone(phone);
@@ -64,5 +65,15 @@ public class Userscontroller {
     public List<Users> queryAll(){
         System.out.println("s");
         return userService.queryAll();
+    }
+    @RequestMapping("querymenuworklevelmessage")
+    @ResponseBody
+    public List<Menu> querymenuworklevelmessage(String uid){
+        return userService.querymenuworklevelmessage(Integer.valueOf(uid));
+    }
+    @RequestMapping("queryworkstartmessage")
+    @ResponseBody
+    public List<Works> queryworkstartmessage(String uid){
+        return userService.queryworkstartmessage(Integer.valueOf(uid));
     }
 }

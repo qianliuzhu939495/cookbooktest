@@ -1,11 +1,6 @@
 package com.cookbook.service;
-import com.cookbook.dao.MenuDao;
-import com.cookbook.dao.StudioOrder;
-import com.cookbook.dao.UserDao;
-import com.cookbook.dao.WorksDao;
-import com.cookbook.entity.Menu;
-import com.cookbook.entity.Users;
-import com.cookbook.entity.Works;
+import com.cookbook.dao.*;
+import com.cookbook.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +16,12 @@ public class UserService {
     WorksDao worksDao;
     @Resource
     StudioOrder studioOrder;
+    @Resource
+    MenuStepsDao menuStepsDao;
+    @Resource
+    MaterialsDetailDao materialsDetailDao;
+    @Resource
+    LeavlMessageDao leavlMessageDao;
     public Users quryByPwd(String phone, String pwd){
         Users users = ud.queryByPwd(phone, pwd);
         System.out.println(users);
@@ -30,8 +31,18 @@ public class UserService {
             users.setFollows(ud.querybeiguanzhu(uid));
             users.setUser_menus(ud.queryLikemenu(uid));
             users.setUser_studios(ud.queryLikestudios(uid));
-            users.setMunus(menuDao.querybyuid(uid));
-            users.setWorks(worksDao.querybyuid(uid));
+            List<Menu> menus = menuDao.querybyuid(uid);
+            for(Menu m:menus){
+                m.setWorks(worksDao.querybymid(m.getMid()));
+                m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
+            }
+            users.setMunus(menus);
+            List<Works> works = worksDao.querybyuidtwo(uid);
+            for(Works w:works){
+                w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
+                w.setStartUsers(worksDao.querystartBywid(w.getWid()));
+            }
+            users.setWorks(works);
             users.setMystudio(studioOrder.queryBypay(uid));
             users.setMystudio(studioOrder.queryByincome(uid));
         }
@@ -48,9 +59,18 @@ public class UserService {
         users.setFollows(ud.querybeiguanzhu(uid));
         users.setUser_menus(ud.queryLikemenu(uid));
         users.setUser_studios(ud.queryLikestudios(uid));
-        users.setMunus(menuDao.querybyuid(uid));
-        users.setWorks(worksDao.querybyuid(uid));
-        users.setMystudio(studioOrder.queryBypay(uid));
+        List<Menu> menus = menuDao.querybyuid(uid);
+        for(Menu m:menus){
+            m.setWorks(worksDao.querybymid(m.getMid()));
+            m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
+        }
+        users.setMunus(menus);
+        List<Works> works = worksDao.querybyuidtwo(uid);
+        for(Works w:works){
+            w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
+            w.setStartUsers(worksDao.querystartBywid(w.getWid()));
+        }
+        users.setWorks(works);        users.setMystudio(studioOrder.queryBypay(uid));
         users.setMystudio(studioOrder.queryByincome(uid));
         return users;
     }
@@ -61,9 +81,18 @@ public class UserService {
         users.setFollows(ud.querybeiguanzhu(uid));
         users.setUser_menus(ud.queryLikemenu(uid));
         users.setUser_studios(ud.queryLikestudios(uid));
-        users.setMunus(menuDao.querybyuid(uid));
-        users.setWorks(worksDao.querybyuid(uid));
-        users.setMystudio(studioOrder.queryBypay(uid));
+        List<Menu> menus = menuDao.querybyuid(uid);
+        for(Menu m:menus){
+            m.setWorks(worksDao.querybymid(m.getMid()));
+            m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
+        }
+        users.setMunus(menus);
+        List<Works> works = worksDao.querybyuidtwo(uid);
+        for(Works w:works){
+            w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
+            w.setStartUsers(worksDao.querystartBywid(w.getWid()));
+        }
+        users.setWorks(works);        users.setMystudio(studioOrder.queryBypay(uid));
         users.setMystudio(studioOrder.queryByincome(uid));
         return users;
 
@@ -89,5 +118,20 @@ public class UserService {
         }
         return users;
     }
-
+    public List<Menu> querymenuworklevelmessage(Integer uid){
+        List<Menu> menus = menuDao.querybyuid(uid);
+        for(Menu m:menus){
+            m.setWorks(worksDao.querybymid(m.getMid()));
+            m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
+        }
+        return menus;
+    }
+    public List<Works> queryworkstartmessage(Integer uid){
+        List<Works> works = worksDao.querybyuidtwo(uid);
+        for(Works w:works){
+            w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
+            w.setStartUsers(worksDao.querystartBywid(w.getWid()));
+        }
+        return works;
+    }
 }
