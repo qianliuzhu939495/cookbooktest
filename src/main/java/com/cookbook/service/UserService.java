@@ -32,16 +32,16 @@ public class UserService {
             users.setUser_menus(ud.queryLikemenu(uid));
             users.setUser_studios(ud.queryLikestudios(uid));
             List<Menu> menus = menuDao.querybyuid(uid);
-        /*    for(Menu m:menus){
+            for(Menu m:menus){
                 m.setWorks(worksDao.querybymid(m.getMid()));
                 m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
-            }*/
+            }
             users.setMunus(menus);
             List<Works> works = worksDao.querybyuidtwo(uid);
-           /* for(Works w:works){
+            for(Works w:works){
                 w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
                 w.setStartUsers(worksDao.querystartBywid(w.getWid()));
-            }*/
+            }
             users.setWorks(works);
             users.setMystudio(studioOrder.queryBypay(uid));
             users.setMystudio(studioOrder.queryByincome(uid));
