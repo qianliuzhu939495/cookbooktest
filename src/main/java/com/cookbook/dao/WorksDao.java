@@ -20,4 +20,6 @@ public interface WorksDao {
     List<Works_message> queryworksmessage(Integer wid);
     @Select("select u.* from Works_start ws left join users u on ws.uid=u.uid where ws.Wid=#{wid}")
     List<Users> querystartBywid(Integer wid);
+    @Select("select * from works where day(MakeTime) BETWEEN day(NOW())-7 and day(NOW()) and mid=#{mid}")
+    List<Works> querySevenWork(Integer mid);
 }
