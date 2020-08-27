@@ -29,8 +29,7 @@ public class MenuController {
     }
     @RequestMapping("querybymtidorderliuxing")
     public List<Menu> querybymtidorderliuxing(Integer mtid){
-        System.out.println(mtid);
-        System.out.println(menuService.querybymtidorderliuxing(mtid));
+
         return menuService.querybymtidorderliuxing(mtid);
     }
 }
