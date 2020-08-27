@@ -29,10 +29,10 @@ public interface UserDao {
     @Select("select u.* from User_User uu LEFT JOIN users u on u.uid=uu.uid where uu.followuid=#{uid}")
     List<Users> querybeiguanzhu(Integer uid);
     //查询用户收藏的菜谱
-    @Select("select um.SaveTime,m.* from User_menu um LEFT JOIN menu m on m.mid=um.mid where um.uid=#{uid}")
+    @Select("select um.SaveTime,m.* from User_menu um LEFT JOIN menu m on m.mid=um.mid where um.uid=#{uid} order by um.saveTime desc")
     List<User_menu> queryLikemenu(Integer uid);
     //查询用户收藏的课程
-    @Select("select s.*,us.SaveTime from user_studio us LEFT JOIN studio s on s.Sid=us.Sid where us.uid=#{uid}")
+    @Select("select s.*,us.SaveTime from user_studio us LEFT JOIN studio s on s.Sid=us.Sid where us.uid=#{uid} order by us.saveTime desc")
     List<User_studio> queryLikestudios(Integer uid);
 
 
