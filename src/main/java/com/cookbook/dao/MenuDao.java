@@ -1,6 +1,7 @@
 package com.cookbook.dao;
 
 import com.cookbook.entity.Menu;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -20,4 +21,8 @@ public interface MenuDao {
             "SELECT *,(select count(*) from works w where w.mid=m.mid and day(w.MakeTime) BETWEEN day(NOW())-7 and day(NOW())) count from menu m ORDER BY count desc limit 999999) as a\n" +
             "where a.state=0 and a.Mtid=#{mtid}")
     List<Menu> querybymtidorderliuxing(Integer mtid);
+    @Select("select m.* from user_menu um left join menu m on um.mid=m.mid where um.uid=#{uid} order by um.savetime desc")
+    List<Menu> queryusercollectedmenu(Integer uid);
+/*    @Insert("insert into menu values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})")
+    Integer save*/
 }

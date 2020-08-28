@@ -1,6 +1,7 @@
 package com.cookbook.controller;
 
 import com.cookbook.entity.Menu;
+import com.cookbook.entity.Studio;
 import com.cookbook.entity.Users;
 import com.cookbook.entity.Works;
 import com.cookbook.service.UserService;
@@ -75,5 +76,15 @@ public class Userscontroller {
     @ResponseBody
     public List<Works> queryworkstartmessage(String uid){
         return userService.queryworkstartmessage(Integer.valueOf(uid));
+    }
+    @RequestMapping("queryusercollectedmenu")
+    @ResponseBody
+    public List<Menu> queryusercollectedmenu(String uid){
+        return userService.queryusercollectedmenu(Integer.valueOf(uid));
+    }
+    @RequestMapping("queryusercollectedstudio")
+    @ResponseBody
+    public List<Studio> queryusercollectedstudio(String uid){
+        return userService.queryusercollectedstudio(Integer.valueOf(uid));
     }
 }

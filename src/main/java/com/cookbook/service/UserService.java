@@ -22,6 +22,8 @@ public class UserService {
     MaterialsDetailDao materialsDetailDao;
     @Resource
     LeavlMessageDao leavlMessageDao;
+    @Resource
+    StudioDao studioDao;
     public Users quryByPwd(String phone, String pwd){
         Users users = ud.queryByPwd(phone, pwd);
         System.out.println(users);
@@ -133,5 +135,11 @@ public class UserService {
             w.setStartUsers(worksDao.querystartBywid(w.getWid()));
         }
         return works;
+    }
+    public List<Menu> queryusercollectedmenu(Integer uid){
+        return menuDao.queryusercollectedmenu(uid);
+    }
+    public List<Studio> queryusercollectedstudio(Integer uid){
+        return studioDao.queryusercollectedstudio(uid);
     }
 }
