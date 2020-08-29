@@ -20,4 +20,9 @@ public interface MenuDao {
             "SELECT *,(select count(*) from works w where w.mid=m.mid and day(w.MakeTime) BETWEEN day(NOW())-7 and day(NOW())) count from menu m ORDER BY count desc limit 999999) as a\n" +
             "where a.state=0 and a.Mtid=#{mtid}")
     List<Menu> querybymtidorderliuxing(Integer mtid);
+
+    @Select("SELECT * from(\n" +
+            "SELECT *,(select count(*) from Works w where w.Mid=m.Mid) count from menu m ORDER BY count DESC limit 999999) as a\n" +
+            "where a.state=0 and a.Mtid=#{mtid}")
+    List<Menu> querybymtidorderShouhuanying(Integer mtid);
 }

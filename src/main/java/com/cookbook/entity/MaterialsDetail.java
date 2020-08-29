@@ -3,10 +3,10 @@ package com.cookbook.entity;
 public class MaterialsDetail {
     private Integer Mdid;
     private String Material;
-    private Integer Num;
+    private String Num;
     private Integer Mid;
 
-    public MaterialsDetail(Integer mdid, String material, Integer num, Integer mid) {
+    public MaterialsDetail(Integer mdid, String material, String num, Integer mid) {
         Mdid = mdid;
         Material = material;
         Num = num;
@@ -32,11 +32,11 @@ public class MaterialsDetail {
         Material = material;
     }
 
-    public Integer getNum() {
+    public String getNum() {
         return Num;
     }
 
-    public void setNum(Integer num) {
+    public void setNum(String num) {
         Num = num;
     }
 

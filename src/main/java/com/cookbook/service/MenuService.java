@@ -1,11 +1,7 @@
 package com.cookbook.service;
 
-import com.cookbook.dao.MenuDao;
-import com.cookbook.dao.UserDao;
-import com.cookbook.dao.WorksDao;
-import com.cookbook.entity.Menu;
-import com.cookbook.entity.Users;
-import com.cookbook.entity.Works;
+import com.cookbook.dao.*;
+import com.cookbook.entity.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -21,6 +17,10 @@ public class MenuService {
     WorksDao worksDao;
     @Resource
     UserDao userDao;
+    @Resource
+    MaterialsDetailDao materialsDetailDao;
+    @Resource
+    MenuStepsDao menuStepsDao;
     public List<Menu> queryThisMonth(){
         List<Menu> menus = menuDao.queryThisMonth();
         for (Menu menu:menus){
@@ -50,6 +50,27 @@ public class MenuService {
         for (Menu menu:menus){
             List<Works> works = worksDao.querySevenWork(menu.getMid());
             menu.setWorks(works);
+            List<MaterialsDetail> materialsDetails = materialsDetailDao.queryBymid(menu.getMid());
+            menu.setMaterialsDetails(materialsDetails);
+            List<MenuStep> menuSteps = menuStepsDao.queryBymid(menu.getMid());
+            menu.setMenuSteps(menuSteps);
+            Users querybyid = userDao.querybyid(menu.getUid());
+            menu.setUsers(querybyid);
+        }
+        return menus;
+    }
+
+    public List<Menu> querybymtidorderShouhuanying(Integer mtid) {
+        List<Menu> menus = menuDao.querybymtidorderShouhuanying(mtid);
+        for (Menu menu:menus){
+            List<Works> works = worksDao.querybymid(menu.getMid());
+            menu.setWorks(works);
+            List<MaterialsDetail> materialsDetails = materialsDetailDao.queryBymid(menu.getMid());
+            menu.setMaterialsDetails(materialsDetails);
+            List<MenuStep> menuSteps = menuStepsDao.queryBymid(menu.getMid());
+            menu.setMenuSteps(menuSteps);
+            Users querybyid = userDao.querybyid(menu.getUid());
+            menu.setUsers(querybyid);
         }
         return menus;
     }
