@@ -1,10 +1,40 @@
 package com.cookbook.entity;
 
+import java.util.List;
+
 public class Functions {
     private Integer Fid;
     private String Fname;
     private String URL;
     private Integer flevel;
+    private List<Role> roles;
+
+    public Functions(Integer fid, String fname, String URL, Integer flevel, List<Role> roles) {
+        Fid = fid;
+        Fname = fname;
+        this.URL = URL;
+        this.flevel = flevel;
+        this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "Functions{" +
+                "Fid=" + Fid +
+                ", Fname='" + Fname + '\'' +
+                ", URL='" + URL + '\'' +
+                ", flevel=" + flevel +
+                ", roles=" + roles +
+                '}';
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Functions(Integer fid, String fname, String URL, Integer flevel) {
         Fid = fid;
@@ -48,13 +78,4 @@ public class Functions {
         this.flevel = flevel;
     }
 
-    @Override
-    public String toString() {
-        return "Functions{" +
-                "Fid=" + Fid +
-                ", Fname='" + Fname + '\'' +
-                ", URL='" + URL + '\'' +
-                ", flevel=" + flevel +
-                '}';
-    }
 }
