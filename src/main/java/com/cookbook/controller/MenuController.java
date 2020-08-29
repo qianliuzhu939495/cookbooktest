@@ -32,4 +32,9 @@ public class MenuController {
 
         return menuService.querybymtidorderliuxing(mtid);
     }
+    @RequestMapping("querybymtidorderShouhuanying")
+    public List<Menu> querybymtidorderShouhuanying(Integer mtid){
+
+        return menuService.querybymtidorderShouhuanying(mtid);
+    }
 }

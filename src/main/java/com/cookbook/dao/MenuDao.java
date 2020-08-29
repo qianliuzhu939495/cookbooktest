@@ -25,4 +25,9 @@ public interface MenuDao {
     List<Menu> queryusercollectedmenu(Integer uid);
 /*    @Insert("insert into menu values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})")
     Integer save*/
+
+    @Select("SELECT * from(\n" +
+            "SELECT *,(select count(*) from Works w where w.Mid=m.Mid) count from menu m ORDER BY count DESC limit 999999) as a\n" +
+            "where a.state=0 and a.Mtid=#{mtid}")
+    List<Menu> querybymtidorderShouhuanying(Integer mtid);
 }
