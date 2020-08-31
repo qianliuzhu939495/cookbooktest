@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface MenuDao {
+public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     @Select("SELECT *,(select count(*) from Works w where w.Mid=m.Mid) count from menu m where m.state=0 and  m.MadeTime BETWEEN DATE_FORMAT(CURDATE(),'%Y-%m-01 00:00:00') and DATE_FORMAT(LAST_DAY(CURDATE()),'%Y-%m-%d 23:59:59') ORDER BY count DESC LIMIT 6")
     public List<Menu> queryThisMonth();
     @Select("SELECT *,(select count(*) from Works w where w.Mid=m.Mid) count from menu m where m.state=0 and  m.MadeTime BETWEEN DATE_ADD(CURDATE()-DAY(CURDATE())+1,INTERVAL -1 MONTH) and LAST_DAY(DATE_SUB(NOW(),INTERVAL 1 MONTH)) ORDER BY count DESC LIMIT 4")
@@ -23,11 +23,13 @@ public interface MenuDao {
     List<Menu> querybymtidorderliuxing(Integer mtid);
     @Select("select m.* from user_menu um left join menu m on um.mid=m.mid where um.uid=#{uid} order by um.savetime desc")
     List<Menu> queryusercollectedmenu(Integer uid);
-/*    @Insert("insert into menu values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})")
-    Integer save*/
+    @Insert("INSERT into menu(mname,pic,info,mtid,state,uid,madeTime) values(#{mname},#{pic},#{info},#{mtid},#{state},#{uid},NOW())")
+    void savemenu(Menu menu);
 
     @Select("SELECT * from(\n" +
             "SELECT *,(select count(*) from Works w where w.Mid=m.Mid) count from menu m ORDER BY count DESC limit 999999) as a\n" +
             "where a.state=0 and a.Mtid=#{mtid}")
     List<Menu> querybymtidorderShouhuanying(Integer mtid);
+    @Select("select * from menu where pic=#{pic}")
+    Menu querybypic(String pic);
 }

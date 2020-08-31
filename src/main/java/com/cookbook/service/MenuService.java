@@ -74,4 +74,9 @@ public class MenuService {
         }
         return menus;
     }
+    public Menu savemenu(Menu menu){
+        menuDao.savemenu(menu);
+        return menuDao.querybypic(menu.getPic());
+    }
+
 }
