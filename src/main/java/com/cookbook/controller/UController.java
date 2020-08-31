@@ -20,4 +20,8 @@ public class UController {
     public List<Users> queryuserinfo(){
         return userService.queryuserinfo();
     }
+    @RequestMapping("queryBylikeUname")
+    public List<Users> queryBylikeUname(String uname){
+        return userService.queryBylikeUname(uname);
+    }
 }
