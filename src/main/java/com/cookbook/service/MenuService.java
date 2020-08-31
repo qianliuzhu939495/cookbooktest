@@ -79,4 +79,32 @@ public class MenuService {
         return menuDao.querybypic(menu.getPic());
     }
 
+    public List<Menu> queryAllMenu(){
+        List<Menu> menus = menuDao.queryAllMenu();
+        for (Menu menu:menus){
+            List<Works> works = worksDao.querybymid(menu.getMid());
+            menu.setWorks(works);
+            List<MaterialsDetail> materialsDetails = materialsDetailDao.queryBymid(menu.getMid());
+            menu.setMaterialsDetails(materialsDetails);
+            List<MenuStep> menuSteps = menuStepsDao.queryBymid(menu.getMid());
+            menu.setMenuSteps(menuSteps);
+            Users querybyid = userDao.querybyid(menu.getUid());
+            menu.setUsers(querybyid);
+        }
+        return menus;
+    }
+    public List<Menu> queryBymname(String mname){
+        List<Menu> menus = menuDao.queryBymname(mname);
+        for (Menu menu:menus){
+            List<Works> works = worksDao.querybymid(menu.getMid());
+            menu.setWorks(works);
+            List<MaterialsDetail> materialsDetails = materialsDetailDao.queryBymid(menu.getMid());
+            menu.setMaterialsDetails(materialsDetails);
+            List<MenuStep> menuSteps = menuStepsDao.queryBymid(menu.getMid());
+            menu.setMenuSteps(menuSteps);
+            Users querybyid = userDao.querybyid(menu.getUid());
+            menu.setUsers(querybyid);
+        }
+        return menus;
+    }
 }

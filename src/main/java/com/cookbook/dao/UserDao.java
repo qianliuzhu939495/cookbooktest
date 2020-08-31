@@ -19,7 +19,7 @@ public interface UserDao {
     Integer sasveone(String phone);
     @Insert("insert into users(uname,pwd,phone,createTime) values('default',#{param1},#{param2},now())")
     Integer sasveoneRe(String pwd,String phone);
-    @Select("select * from users")
+    @Select("SELECT *,(SELECT COUNT(*) from works w where w.uid=u.uid) count from users u ORDER BY count desc")
     List<Users> queryAll();
     @Select("select * from users where uid=#{uid}")
     Users querybyid(Integer uid);
@@ -34,7 +34,8 @@ public interface UserDao {
     //查询用户收藏的课程
     @Select("select s.*,us.SaveTime from user_studio us LEFT JOIN studio s on s.Sid=us.Sid where us.uid=#{uid} order by us.saveTime desc")
     List<User_studio> queryLikestudios(Integer uid);
-
-
+    //模糊查询
+    @Select("select * from users where uname like '%${uname}%'")
+    List<Users> queryBylikeUname(String uname);
 
 }
