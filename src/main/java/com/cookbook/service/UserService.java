@@ -142,4 +142,16 @@ public class UserService {
     public List<Studio> queryusercollectedstudio(Integer uid){
         return studioDao.queryusercollectedstudio(uid);
     }
+    public List<Users> queryBylikeUname(String uname){
+        List<Users> users = ud.queryBylikeUname(uname);
+        for (Users user:users){
+            List<Menu> menus = menuDao.querybyuid(user.getUid());
+            user.setMunus(menus);
+            List<Works> works = worksDao.querybyuid(user.getUid());
+            user.setWorks(works);
+            List<Users> guanzhu = ud.queryguanzhu(user.getUid());
+            user.setUsers(guanzhu);
+        }
+        return users;
+    }
 }

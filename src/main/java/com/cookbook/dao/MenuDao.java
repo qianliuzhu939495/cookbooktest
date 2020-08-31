@@ -3,6 +3,7 @@ package com.cookbook.dao;
 import com.cookbook.entity.Menu;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -30,4 +31,10 @@ public interface MenuDao {
             "SELECT *,(select count(*) from Works w where w.Mid=m.Mid) count from menu m ORDER BY count DESC limit 999999) as a\n" +
             "where a.state=0 and a.Mtid=#{mtid}")
     List<Menu> querybymtidorderShouhuanying(Integer mtid);
+
+    @Select("SELECT * FROM menu where state=0 ORDER BY MadeTime")
+    public List<Menu> queryAllMenu();
+
+    @Select("SELECT * FROM menu where state=0 and Mname LIKE '%${mname}%'")
+    public List<Menu> queryBymname(@Param("mname") String mname);
 }

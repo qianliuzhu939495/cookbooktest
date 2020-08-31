@@ -37,4 +37,13 @@ public class MenuController {
 
         return menuService.querybymtidorderShouhuanying(mtid);
     }
+    @RequestMapping("queryAllMenu")
+    public List<Menu> queryAllMenu(){
+
+        return menuService.queryAllMenu();
+    }
+    @RequestMapping("queryBymname")
+    public List<Menu> queryBymname(String mname){
+        return menuService.queryBymname(mname);
+    }
 }
