@@ -20,4 +20,7 @@ public class MenuTypesService {
         }
         return menuTypes;
     }
+    public MenuTypes querybymtid(Integer mtid){
+        return menuTypesDao.querybymtid(mtid);
+    }
 }

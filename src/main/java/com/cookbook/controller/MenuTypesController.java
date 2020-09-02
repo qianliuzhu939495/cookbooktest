@@ -19,4 +19,8 @@ public class MenuTypesController {
     public List<MenuTypes> queryall(){
         return menuTypesService.queryall();
     }
+    @RequestMapping("querybymtid")
+    public MenuTypes querybymtid(Integer mtid){
+        return menuTypesService.querybymtid(mtid);
+    }
 }
