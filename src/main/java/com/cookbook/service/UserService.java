@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -31,7 +32,9 @@ public class UserService {
             Integer uid = users.getUid();
             users.setUsers(ud.queryguanzhu(uid));
             users.setFollows(ud.querybeiguanzhu(uid));
-            users.setUser_menus(ud.queryLikemenu(uid));
+            List<Menu> menus1 = ud.queryLikemenu(uid);
+            System.out.println(menus1);
+            users.setUser_menus(menus1);
             users.setUser_studios(ud.queryLikestudios(uid));
             List<Menu> menus = menuDao.querybyuid(uid);
             for(Menu m:menus){
@@ -53,13 +56,12 @@ public class UserService {
     public Users queryByphone(String phone){
         Users users = ud.queryByMsg(phone);
         if(null==users){
-            ud.sasveone(phone);
+            ud.sasveone(UUID.randomUUID().toString().replaceAll("-", ""),phone);
         }
         users = ud.queryByMsg(phone);
         Integer uid = users.getUid();
         users.setUsers(ud.queryguanzhu(uid));
         users.setFollows(ud.querybeiguanzhu(uid));
-        users.setUser_menus(ud.queryLikemenu(uid));
         users.setUser_studios(ud.queryLikestudios(uid));
         List<Menu> menus = menuDao.querybyuid(uid);
         for(Menu m:menus){
@@ -81,7 +83,6 @@ public class UserService {
         Integer uid = users.getUid();
         users.setUsers(ud.queryguanzhu(uid));
         users.setFollows(ud.querybeiguanzhu(uid));
-        users.setUser_menus(ud.queryLikemenu(uid));
         users.setUser_studios(ud.queryLikestudios(uid));
         List<Menu> menus = menuDao.querybyuid(uid);
         for(Menu m:menus){
@@ -100,10 +101,10 @@ public class UserService {
 
     }
     public Integer sasveone(String phone){
-        return ud.sasveone(phone);
+        return ud.sasveone(UUID.randomUUID().toString().replaceAll("-", ""),phone);
     }
     public Integer sasveoneRe(String pwd,String phone){
-        return ud.sasveoneRe(pwd,phone);
+        return ud.sasveoneRe(UUID.randomUUID().toString().replaceAll("-", ""),pwd,phone);
     }
     public List<Users> queryAll(){
         return ud.queryAll();
