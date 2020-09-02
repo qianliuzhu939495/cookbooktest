@@ -10,4 +10,6 @@ import java.util.List;
 public interface MenuTypesDao {
     @Select("select * from menutypes where mlevel=#{mlevel}")
     public List<MenuTypes> querybymlevel(Integer mlevel);
+    @Select("select * from menutypes where mtid=#{mtid}")
+    public MenuTypes querybymtid(Integer mtid);
 }

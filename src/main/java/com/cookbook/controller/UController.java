@@ -24,4 +24,8 @@ public class UController {
     public List<Users> queryBylikeUname(String uname){
         return userService.queryBylikeUname(uname);
     }
+    @RequestMapping("querybyid")
+    public Users querybyid(Integer uid){
+        return userService.querybyuid(uid);
+    }
 }

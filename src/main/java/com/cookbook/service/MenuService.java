@@ -42,7 +42,14 @@ public class MenuService {
         return menus;
     }
     public List<Menu> queryNewMenu(){
-        return menuDao.queryNewMenu();
+        List<Menu> menus = menuDao.queryNewMenu();
+        for (Menu menu:menus){
+            List<Works> works = worksDao.querybymid(menu.getMid());
+            menu.setWorks(works);
+            Users users = userDao.querybyid(menu.getUid());
+            menu.setUsers(users);
+        }
+        return menus;
     }
 
     public List<Menu> querybymtidorderliuxing(Integer mtid) {

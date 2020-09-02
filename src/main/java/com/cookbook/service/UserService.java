@@ -155,4 +155,7 @@ public class UserService {
         }
         return users;
     }
+    public Users querybyuid(Integer uid){
+        return ud.querybyid(uid);
+    }
 }
