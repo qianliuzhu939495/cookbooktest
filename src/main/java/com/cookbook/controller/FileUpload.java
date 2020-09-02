@@ -4,6 +4,7 @@ package com.cookbook.controller;
 import com.alibaba.fastjson.JSON;
 import com.cookbook.dao.MaterialsDetailDao;
 import com.cookbook.dao.MenuStepsDao;
+import com.cookbook.dao.UserDao;
 import com.cookbook.entity.MaterialsDetail;
 import com.cookbook.entity.Menu;
 import com.cookbook.entity.MenuStep;
@@ -39,6 +40,8 @@ public class FileUpload {
     MenuStepsDao menuStepsDao;
     @Resource
     MaterialsDetailDao materialsDetailDao;
+    @Resource
+    UserDao userDao;
     String sqlPic="";
     List sts = new ArrayList<String>();
     @RequestMapping("uploads")
@@ -104,13 +107,13 @@ public class FileUpload {
             materialsDetails.get(m).setMid(savemenu.getMid());
             materialsDetailDao.savedetail(materialsDetails.get(m));
         }
-        sqlPic="";
-        sts = new ArrayList<String>();
         System.out.println(menuSteps);
         return "";
     }
     @RequestMapping("uploadImage")
+    @ResponseBody
     public String uploadImage(@RequestParam("file2") MultipartFile[] image ) throws IOException {
+        sts = new ArrayList<String>();
         for(MultipartFile file:image){
             String originalFilename = file.getOriginalFilename();
             // 判断是否有文件
@@ -130,17 +133,25 @@ public class FileUpload {
         return "ok";
     }
     @RequestMapping("uploadpic")
-    public String uploadpic(@RequestParam("file1") MultipartFile pic ) throws IOException {
-        String pics = pic.getOriginalFilename();
+    @ResponseBody
+    public String uploadpic(@RequestParam("file1") MultipartFile file1) throws IOException {
+        sqlPic="";
+        String pics = file1.getOriginalFilename();
         if(null != pics && !"".equals(pics)){
-            String fileExt = pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
+            String fileExt = file1.getOriginalFilename().substring(file1.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
             String pikId = UUID.randomUUID().toString().replaceAll("-", "");
             String newpic = pikId + "." + fileExt;
             sqlPic=newpic;
             File fileSave = new File(picturePath, newpic);
-            pic.transferTo(fileSave);
+            file1.transferTo(fileSave);
         }
         System.out.println("pic"+sqlPic);
         return "ok";
+    }
+    @RequestMapping("uploaduserPicsql")
+    @ResponseBody
+    public String uploaduserPicsql(@RequestParam("uid") String uid) throws IOException {
+        userDao.updateUserpic(sqlPic,uid);
+        return sqlPic;
     }
 }

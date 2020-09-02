@@ -1,5 +1,6 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.UserDao;
 import com.cookbook.entity.Menu;
 import com.cookbook.entity.Studio;
 import com.cookbook.entity.Users;
@@ -22,6 +23,8 @@ public class Userscontroller {
     int mobile_code=1024;
     @Resource
     UserService userService;
+    @Resource
+    UserDao userDao;
     @RequestMapping("SMS")
     @ResponseBody
     public String SMS(String phone){
@@ -87,5 +90,10 @@ public class Userscontroller {
     @ResponseBody
     public List<Studio> queryusercollectedstudio(String uid){
         return userService.queryusercollectedstudio(Integer.valueOf(uid));
+    }
+    @RequestMapping("updateInfo")
+    @ResponseBody
+    void updateInfo(@RequestBody Users users){
+        userDao.updateInfo(users);
     }
 }

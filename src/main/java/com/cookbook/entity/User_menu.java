@@ -4,16 +4,25 @@ import java.util.Date;
 import java.util.List;
 
 public class User_menu {
+    private Integer uid;
     private Date SaveTime;
-    private List<Menu> menus;
+    private Menu umenus;
     public User_menu() {
     }
 
-    public User_menu(Integer uid, Integer mid, Date saveTime, List<Menu> menus) {
+    public User_menu(Integer uid, Date saveTime, Menu umenus) {
+        this.uid = uid;
         SaveTime = saveTime;
-        this.menus = menus;
+        this.umenus = umenus;
     }
 
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
     public Date getSaveTime() {
         return SaveTime;
@@ -23,19 +32,20 @@ public class User_menu {
         SaveTime = saveTime;
     }
 
-    public List<Menu> getMenus() {
-        return menus;
+    public Menu getUmenus() {
+        return umenus;
     }
 
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
+    public void setUmenus(Menu umenus) {
+        this.umenus = umenus;
     }
 
     @Override
     public String toString() {
         return "User_menu{" +
+                "uid=" + uid +
                 ", SaveTime=" + SaveTime +
-                ", menus=" + menus +
+                ", umenus=" + umenus +
                 '}';
     }
 }

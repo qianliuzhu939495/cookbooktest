@@ -17,7 +17,7 @@ public class Users {
     private Integer state;
     private List<Menu> munus;//创建的菜谱
     private List<Works> works;
-    private  List<User_menu> user_menus; //用户收藏菜单
+    private  List<Menu> user_menus; //用户收藏菜单
     private List<User_studio> user_studios; // 收藏课程
     private List<Users>  users; //关注的人
     private List<Users>  follows; //被关注的人
@@ -25,7 +25,8 @@ public class Users {
     private List<Studio> paystudio; //我购买的课程
     public Users() {
     }
-    public Users(Integer uid, String access_token, String uname, String pwd, String phone, String pic, String selfinfo, Integer sex, Date birthday, Date createTime, Integer state, List<Menu> munus, List<Works> works, List<User_menu> user_menus, List<User_studio> user_studios, List<Users> users, List<Users> follows, List<Studio> mystudio, List<Studio> paystudio) {
+
+    public Users(Integer uid, String access_token, String uname, String pwd, String phone, String pic, String selfinfo, Integer sex, Date birthday, Date createTime, Integer state, List<Menu> munus, List<Works> works, List<Menu> user_menus, List<User_studio> user_studios, List<Users> users, List<Users> follows, List<Studio> mystudio, List<Studio> paystudio) {
         this.uid = uid;
         this.access_token = access_token;
         this.uname = uname;
@@ -151,11 +152,11 @@ public class Users {
         this.works = works;
     }
 
-    public List<User_menu> getUser_menus() {
+    public List<Menu> getUser_menus() {
         return user_menus;
     }
 
-    public void setUser_menus(List<User_menu> user_menus) {
+    public void setUser_menus(List<Menu> user_menus) {
         this.user_menus = user_menus;
     }
 
