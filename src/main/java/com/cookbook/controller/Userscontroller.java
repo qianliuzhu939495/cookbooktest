@@ -9,13 +9,11 @@ import com.cookbook.service.UserService;
 
 import com.cookbook.util.Sms_util;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @Controller
@@ -95,5 +93,23 @@ public class Userscontroller {
     @ResponseBody
     void updateInfo(@RequestBody Users users){
         userDao.updateInfo(users);
+    }
+
+    @RequestMapping("MsgUpdatePwd")
+    @ResponseBody
+    public String MsgUpdatePwd(@RequestBody Map<String,String> map){
+        System.out.println(map.get("phone")+","+map.get("msg")+","+map.get("pwd"));
+        if(!String.valueOf(mobile_code).equals(map.get("msg"))){
+            return null;
+        }
+        try {
+            Users users = userService.queryByphone(map.get("phone"));
+           userDao.msgUpdatePwd(map.get("pwd"), String.valueOf(users.getUid()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return "ok";
+        }
+
     }
 }

@@ -1,6 +1,5 @@
 package com.cookbook.entity;
 
-import sun.dc.pr.PRError;
 
 import java.util.Date;
 import java.util.List;

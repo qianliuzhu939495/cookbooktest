@@ -9,6 +9,7 @@ import com.cookbook.entity.MaterialsDetail;
 import com.cookbook.entity.Menu;
 import com.cookbook.entity.MenuStep;
 import com.cookbook.service.MenuService;
+import com.show.api.ShowApiRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +64,7 @@ public class FileUpload {
                 // 重构文件名称
                 String pikId = UUID.randomUUID().toString().replaceAll("-", "");
                 String newVidoeName = pikId + "." + fileExt;
+
                 //保存视频
                 File fileSave = new File(savePath, newVidoeName);
                 s.transferTo(fileSave);

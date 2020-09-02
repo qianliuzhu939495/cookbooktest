@@ -41,4 +41,6 @@ public interface UserDao {
     void updateUserpic(String pic,String uid);
     @Update("update users set uname=#{uname},selfinfo=#{selfinfo},sex=#{sex},birthday=#{birthday} where uid=#{uid}")
     void updateInfo(Users users);
+    @Update("update users set pwd=#{param1} where uid=#{param2}")
+    Integer msgUpdatePwd(String pwd,String uid);
 }
