@@ -4,11 +4,11 @@ package com.cookbook.controller;
 import com.alibaba.fastjson.JSON;
 import com.cookbook.dao.MaterialsDetailDao;
 import com.cookbook.dao.MenuStepsDao;
+import com.cookbook.dao.StudioDao;
 import com.cookbook.dao.UserDao;
-import com.cookbook.entity.MaterialsDetail;
-import com.cookbook.entity.Menu;
-import com.cookbook.entity.MenuStep;
+import com.cookbook.entity.*;
 import com.cookbook.service.MenuService;
+import com.cookbook.service.StudioService;
 import com.show.api.ShowApiRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
@@ -43,36 +43,72 @@ public class FileUpload {
     MaterialsDetailDao materialsDetailDao;
     @Resource
     UserDao userDao;
+    @Resource
+    StudioDao studioDao;
+    @Resource
+    StudioService studioService;
     String sqlPic="";
     List sts = new ArrayList<String>();
+    @RequestMapping("upStudios")
+    public String upStudios(@RequestParam("newStudio") String newStudio,@RequestParam("studioDetail") String studioDetail){
+        System.out.println(newStudio);
+        System.out.println(studioDetail);
+        System.out.println(sqlPic);
+        System.out.println(sts);
+        try {
+            Studio studio = JSON.parseObject(newStudio,Studio.class); //菜谱
+            List<StudioDetails> studioDetails= JSON.parseArray(studioDetail,StudioDetails.class);//步骤
+            studio.setStupic(sqlPic);
+            Studio stu = studioService.saveStudio(studio);
+            for(Integer s=0;s<studioDetails.size();s++){
+                studioDetails.get(s).setSurl((String) sts.get(s));
+                studioDetails.get(s).setSid(stu.getSid());
+                studioDao.saveStudioDetail(studioDetails.get(s));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "ok";
+    }
     @RequestMapping("uploads")
-    public String upload(@RequestParam("file") MultipartFile[] video) throws IOException {
+    public String upload(@RequestParam("file1") MultipartFile[] studiopic) throws IOException {
+        sqlPic="";
+        MultipartFile s=studiopic[0];
+        // 原文件名
+        String originalFilename = s.getOriginalFilename();
+        // 判断是否有文件
+        if(null != originalFilename && !"".equals(originalFilename)){
+            String fileExt = s.getOriginalFilename().substring(s.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
+            // 重构文件名称
+            String pikId = UUID.randomUUID().toString().replaceAll("-", "");
+            String newVidoeName = pikId + "." + fileExt;
+            sqlPic=newVidoeName;
+            File fileSave = new File(savePath, newVidoeName);
+            s.transferTo(fileSave);
+        }
+        return "ok";
+    }
+    @RequestMapping("studiosVideo")
+    public String studiosVideo(@RequestParam("file2") MultipartFile[] video) throws IOException {
+        sts = new ArrayList<String>();
         System.out.println(video.length);
         for (MultipartFile s:video) {
             // 原文件名
             String originalFilename = s.getOriginalFilename();
             // 判断是否有文件
             if(null != originalFilename && !"".equals(originalFilename)){
-                /*// 保存文件的路径
-                File newFile = new File(filepath);
-                if(!newFile.exists()){
-                    newFile.mkdirs();
-                }*/
-                //获取文件后缀
-                //获取文件后缀
                 String fileExt = s.getOriginalFilename().substring(s.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
                 // 重构文件名称
                 String pikId = UUID.randomUUID().toString().replaceAll("-", "");
                 String newVidoeName = pikId + "." + fileExt;
-
-                //保存视频
+                sts.add(newVidoeName);
                 File fileSave = new File(savePath, newVidoeName);
                 s.transferTo(fileSave);
             }
         }
         return "ok";
     }
-    @RequestMapping("/download")
+    @RequestMapping("/download") //下载
     public ServletOutputStream download(String fileName, HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 获取下载的文件路径
         File downloadfile = new File(savePath + "/"+fileName);

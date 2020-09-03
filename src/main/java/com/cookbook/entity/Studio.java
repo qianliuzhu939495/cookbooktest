@@ -1,17 +1,29 @@
 package com.cookbook.entity;
 
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
-
+@Table
 public class Studio {
+    @Id
+    @Column
     private Integer Sid;
+    @Column
     private String Sname;
+    @Column
     private double money;
+    @Column
     private Integer Stid;
+    @Column
     private Integer uid;
+    @Column
     private String stupic;
+    @Column
     private String Info;
+    @Column
     private Date UpTime;
     private List<StudioDetails> studioDetails;
     private List<Studio_message> studio_messages;

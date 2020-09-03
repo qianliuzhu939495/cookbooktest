@@ -140,9 +140,7 @@ public class UserService {
     public List<Menu> queryusercollectedmenu(Integer uid){
         return menuDao.queryusercollectedmenu(uid);
     }
-    public List<Studio> queryusercollectedstudio(Integer uid){
-        return studioDao.queryusercollectedstudio(uid);
-    }
+
     public List<Users> queryBylikeUname(String uname){
         List<Users> users = ud.queryBylikeUname(uname);
         for (Users user:users){

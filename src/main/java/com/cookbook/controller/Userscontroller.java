@@ -84,11 +84,7 @@ public class Userscontroller {
     public List<Menu> queryusercollectedmenu(String uid){
         return userService.queryusercollectedmenu(Integer.valueOf(uid));
     }
-    @RequestMapping("queryusercollectedstudio")
-    @ResponseBody
-    public List<Studio> queryusercollectedstudio(String uid){
-        return userService.queryusercollectedstudio(Integer.valueOf(uid));
-    }
+
     @RequestMapping("updateInfo")
     @ResponseBody
     void updateInfo(@RequestBody Users users){
