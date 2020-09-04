@@ -22,4 +22,10 @@ public interface WorksDao {
     List<Users> querystartBywid(Integer wid);
     @Select("select * from works where day(MakeTime) BETWEEN day(NOW())-7 and day(NOW()) and mid=#{mid}")
     List<Works> querySevenWork(Integer mid);
+
+    @Select("select *,(select count(*) from Works_start ws left join users u on ws.uid=u.uid where ws.Wid=w.wid\n" +
+            ") count from Works w where w.Mid=#{mid} ORDER BY count DESC")
+    List<Works> queryBystartcount(Integer mid);
+    @Select("select * from Works where mid=#{mid} ORDER BY MakeTime DESC")
+    public List<Works> queryOrderBytime(Integer mid);
 }
