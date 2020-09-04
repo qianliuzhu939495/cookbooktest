@@ -1,9 +1,6 @@
 package com.cookbook.dao;
 
-import com.cookbook.entity.Studio;
-import com.cookbook.entity.StudioDetails;
-import com.cookbook.entity.StudioTypes;
-import com.cookbook.entity.Studio_message;
+import com.cookbook.entity.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -40,4 +37,12 @@ public interface StudioDao {
     Studio queryByid(String sid);
     @Select("select * from tudiodetails where sid=#{sid} ")
     List<StudioDetails> queryDetailByid(String sid);
+    @Select("select * from studiotypes where stid=#{stid}")
+    StudioTypes queryTypeByid(String stid);
+    //查询购买过，销量
+    @Select("select utid from  userturnover where wid=#{sid}")
+    List<String> querystudiosales(String stid);
+    //查询人购买该视频没
+    @Select("select * from userturnover where uid=#{param1} and wid=#{param2}")
+    UserTurnover queryPaysByid(String uid,String wid);
 }

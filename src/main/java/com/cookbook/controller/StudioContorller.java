@@ -1,6 +1,7 @@
 package com.cookbook.controller;
 
 import com.cookbook.dao.StudioDao;
+import com.cookbook.dao.UserDao;
 import com.cookbook.entity.Studio;
 import com.cookbook.entity.StudioTypes;
 import com.cookbook.entity.Studio_message;
@@ -15,7 +16,8 @@ import java.util.List;
 public class StudioContorller {
     @Resource
     StudioDao studioDao;
-
+    @Resource
+    UserDao userDao;
     @RequestMapping("queryTypes")
     public List<StudioTypes> queryTypes(){
         return studioDao.queryTypes();
@@ -61,11 +63,22 @@ public class StudioContorller {
     @RequestMapping("querydetail")
     public Studio querydetail(String sid){
         Studio stu = studioDao.queryByid(sid);
-        System.out.println(stu);
         stu.setStudioDetails(studioDao.queryDetailByid(sid));
-        System.out.println(stu);
-        stu.setStudio_messages(studioDao.qeuerymessageBysid(Integer.parseInt(sid)));
-        System.out.println(stu);
+        List<Studio_message> studio_messages = studioDao.qeuerymessageBysid(Integer.parseInt(sid));
+        for(Studio_message sm:studio_messages){
+            sm.setLeveluser(userDao.querybyid(sm.getUid()));
+        }
+        stu.setStudio_messages(studio_messages);
         return stu;
+    }
+    @RequestMapping("queryTypeByid")
+    public StudioTypes queryTypeByid(String stid){
+        StudioTypes studioTypes = studioDao.queryTypeByid(stid);
+        System.out.println(stid+studioTypes);
+        return studioTypes;
+    }
+    @RequestMapping("querystudiosales")
+    public String querystudiosales(String sid){
+        return String.valueOf(studioDao.querystudiosales(sid).size());
     }
 }

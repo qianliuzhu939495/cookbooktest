@@ -184,7 +184,7 @@ public class FileUpload {
             file1.transferTo(fileSave);
         }
         System.out.println("pic"+sqlPic);
-        return "ok";
+        return sqlPic;
     }
     @RequestMapping("uploaduserPicsql")
     @ResponseBody

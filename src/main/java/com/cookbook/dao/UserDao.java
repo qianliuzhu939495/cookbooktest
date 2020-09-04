@@ -43,4 +43,5 @@ public interface UserDao {
     void updateInfo(Users users);
     @Update("update users set pwd=#{param1} where uid=#{param2}")
     Integer msgUpdatePwd(String pwd,String uid);
+
 }

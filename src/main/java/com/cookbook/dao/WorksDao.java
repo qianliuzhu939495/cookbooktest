@@ -3,6 +3,7 @@ package com.cookbook.dao;
 import com.cookbook.entity.Users;
 import com.cookbook.entity.Works;
 import com.cookbook.entity.Works_message;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -22,4 +23,6 @@ public interface WorksDao {
     List<Users> querystartBywid(Integer wid);
     @Select("select * from works where day(MakeTime) BETWEEN day(NOW())-7 and day(NOW()) and mid=#{mid}")
     List<Works> querySevenWork(Integer mid);
+    @Insert("insert into works(winfo,pic,mid,uid,maketime) values(#{winfo},#{pic},#{mid},#{uid},NOW())")
+    Integer saveWorks(Works works);
 }

@@ -1,10 +1,8 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.StudioDao;
 import com.cookbook.dao.UserDao;
-import com.cookbook.entity.Menu;
-import com.cookbook.entity.Studio;
-import com.cookbook.entity.Users;
-import com.cookbook.entity.Works;
+import com.cookbook.entity.*;
 import com.cookbook.service.UserService;
 
 import com.cookbook.util.Sms_util;
@@ -23,6 +21,8 @@ public class Userscontroller {
     UserService userService;
     @Resource
     UserDao userDao;
+    @Resource
+    StudioDao studioDao;
     @RequestMapping("SMS")
     @ResponseBody
     public String SMS(String phone){
@@ -106,6 +106,22 @@ public class Userscontroller {
         }finally {
             return "ok";
         }
+    }
+    @RequestMapping("studioQueryuser")
+    @ResponseBody //查询课程作者
+    public Users studioQueryuser(String uid){
+        System.out.println(uid);
+        Users querybyid = userDao.querybyid(Integer.valueOf(uid));
+        System.out.println(querybyid);
+        return querybyid;
+    }
 
+    @RequestMapping("queryPaysByids")
+    @ResponseBody
+    public String  queryPaysByid(String uid,String sid){
+        System.out.println(uid+sid);
+        UserTurnover userTurnover = studioDao.queryPaysByid(uid, sid);
+        System.out.println(userTurnover==null);
+        return userTurnover==null?"no":"yes";
     }
 }
