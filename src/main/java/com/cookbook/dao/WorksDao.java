@@ -25,4 +25,10 @@ public interface WorksDao {
     List<Works> querySevenWork(Integer mid);
     @Insert("insert into works(winfo,pic,mid,uid,maketime) values(#{winfo},#{pic},#{mid},#{uid},NOW())")
     Integer saveWorks(Works works);
+
+    @Select("select *,(select count(*) from Works_start ws left join users u on ws.uid=u.uid where ws.Wid=w.wid\n" +
+            ") count from Works w where w.Mid=#{mid} ORDER BY count DESC")
+    List<Works> queryBystartcount(Integer mid);
+    @Select("select * from Works where mid=#{mid} ORDER BY MakeTime DESC")
+    public List<Works> queryOrderBytime(Integer mid);
 }

@@ -1,6 +1,7 @@
 package com.cookbook.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Works_message {
     private Integer Wmid;
@@ -10,8 +11,10 @@ public class Works_message {
     private Integer uid;
     private Integer State;
     private Date MessageTime;
+    private Users users;
+    private List<Works_message> works_messages;
 
-    public Works_message(Integer wmid, Integer wid, String message, Integer upid, Integer uid, Integer state, Date messageTime) {
+    public Works_message(Integer wmid, Integer wid, String message, Integer upid, Integer uid, Integer state, Date messageTime, Users users, List<Works_message> works_messages) {
         Wmid = wmid;
         Wid = wid;
         Message = message;
@@ -19,9 +22,27 @@ public class Works_message {
         this.uid = uid;
         State = state;
         MessageTime = messageTime;
+        this.users = users;
+        this.works_messages = works_messages;
     }
 
     public Works_message() {
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public List<Works_message> getWorks_messages() {
+        return works_messages;
+    }
+
+    public void setWorks_messages(List<Works_message> works_messages) {
+        this.works_messages = works_messages;
     }
 
     public Integer getWmid() {
@@ -90,6 +111,8 @@ public class Works_message {
                 ", uid=" + uid +
                 ", State=" + State +
                 ", MessageTime=" + MessageTime +
+                ", users=" + users +
+                ", works_messages=" + works_messages +
                 '}';
     }
 }

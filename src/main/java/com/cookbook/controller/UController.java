@@ -28,4 +28,8 @@ public class UController {
     public Users querybyid(Integer uid){
         return userService.querybyuid(uid);
     }
+    @RequestMapping("queryUser")
+    public Users queryUser(Integer uid){
+        return userService.queryUser(uid);
+    }
 }

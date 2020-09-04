@@ -156,4 +156,14 @@ public class UserService {
     public Users querybyuid(Integer uid){
         return ud.querybyid(uid);
     }
+    public Users queryUser(Integer uid){
+        Users user = ud.querybyid(uid);
+        List<Menu> menus = menuDao.querybyuid(user.getUid());
+        user.setMunus(menus);
+        List<Works> works = worksDao.querybyuid(user.getUid());
+        user.setWorks(works);
+        List<Users> guanzhu = ud.queryguanzhu(user.getUid());
+        user.setUsers(guanzhu);
+        return user;
+    }
 }
