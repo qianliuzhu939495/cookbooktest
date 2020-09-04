@@ -19,11 +19,12 @@ import java.util.List;
 public class WorksController {
     @Resource
     WorksDao worksDao;
-
-    @RequestMapping("saveWorks")
-    public Integer saveWorks(@RequestBody Works works){
-        return worksDao.saveWorks(works);
+    @Resource
     WorksService worksService;
+    @RequestMapping("saveWorks")
+    public Integer saveWorks(@RequestBody Works works) {
+        return worksDao.saveWorks(works);
+    }
     @RequestMapping("querybymid")
     public List<Works> querybymid(Integer mid){
         return worksService.querybymid(mid);
