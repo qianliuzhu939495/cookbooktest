@@ -1,5 +1,6 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.LeavlMessageDao;
 import com.cookbook.entity.LeavMessage;
 import com.cookbook.service.LeavlMessageService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,5 +20,13 @@ public class LeavlMessageController {
     public List<LeavMessage> querymessageBymid(Integer mid){
 
         return leavlMessageService.querymessageBymid(mid);
+    }
+    @RequestMapping("querymessagereplyNonull")
+    public List<LeavMessage> querymessagereplyNonull(Integer mid){
+        return leavlMessageService.querymessagereplyNonull(mid);
+    }
+    @RequestMapping("querymessageNull")
+    public List<LeavMessage> querymessageNull(Integer mid){
+        return leavlMessageService.querymessageNull(mid);
     }
 }

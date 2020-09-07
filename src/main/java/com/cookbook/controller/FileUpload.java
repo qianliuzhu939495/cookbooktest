@@ -9,7 +9,6 @@ import com.cookbook.dao.UserDao;
 import com.cookbook.entity.*;
 import com.cookbook.service.MenuService;
 import com.cookbook.service.StudioService;
-import com.show.api.ShowApiRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;

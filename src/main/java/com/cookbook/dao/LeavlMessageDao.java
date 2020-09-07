@@ -10,4 +10,8 @@ import java.util.List;
 public interface LeavlMessageDao {
     @Select("select * from LeavMessage where mid=#{mid}")
     List<LeavMessage> querymessageBymid(Integer mid);
+    @Select("select * from LeavMessage where mid=#{mid} and reply is NOT NULL")
+    List<LeavMessage> querymessagereplyNonull(Integer mid);
+    @Select("select * from LeavMessage where mid=#{mid} and reply is NULL")
+    List<LeavMessage> querymessageNull(Integer mid);
 }

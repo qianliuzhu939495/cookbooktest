@@ -23,4 +23,20 @@ public class LeavlMessageService {
         }
         return leavMessages;
     }
+    public List<LeavMessage> querymessagereplyNonull(Integer mid){
+        List<LeavMessage> leavMessages = leavlMessageDao.querymessagereplyNonull(mid);
+        for (LeavMessage leavMessage:leavMessages){
+            Users querybyid = userDao.querybyid(leavMessage.getUid());
+            leavMessage.setLeavUsers(querybyid);
+        }
+        return leavMessages;
+    }
+    public List<LeavMessage> querymessageNull(Integer mid){
+        List<LeavMessage> leavMessages = leavlMessageDao.querymessageNull(mid);
+        for (LeavMessage leavMessage:leavMessages){
+            Users querybyid = userDao.querybyid(leavMessage.getUid());
+            leavMessage.setLeavUsers(querybyid);
+        }
+        return leavMessages;
+    }
 }

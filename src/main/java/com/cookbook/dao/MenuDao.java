@@ -39,4 +39,7 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     public List<Menu> queryBymname(@Param("mname") String mname);
     @Select("select * from menu where pic=#{pic}")
     Menu querybypic(String pic);
+
+    @Select("select * from menu where mid=#{mid}")
+    Menu querybymid(Integer mid);
 }

@@ -114,4 +114,12 @@ public class MenuService {
         }
         return menus;
     }
+    public Menu querybymid(Integer mid){
+        Menu menu = menuDao.querybymid(mid);
+        List<Works> works = worksDao.querybymid(menu.getMid());
+        menu.setWorks(works);
+        Users users = userDao.querybyid(menu.getUid());
+        menu.setUsers(users);
+        return menu;
+    }
 }

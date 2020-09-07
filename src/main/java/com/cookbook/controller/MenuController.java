@@ -47,5 +47,8 @@ public class MenuController {
     public List<Menu> queryBymname(String mname){
         return menuService.queryBymname(mname);
     }
-
+    @RequestMapping("querybymid")
+    public Menu querybymid(Integer mid){
+        return menuService.querybymid(mid);
+    }
 }
