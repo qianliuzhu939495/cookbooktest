@@ -31,4 +31,9 @@ public interface WorksDao {
     List<Works> queryBystartcount(Integer mid);
     @Select("select * from Works where mid=#{mid} ORDER BY MakeTime DESC")
     public List<Works> queryOrderBytime(Integer mid);
+
+    //查询我的所有作品的维度评论
+    @Select("select * from works_message wm inner join works w on wm.wid=w.wid where w.uid=#{uid} and wm.state=0")
+    List<Works_message> queryMyWorksMessage(String uid);
+
 }

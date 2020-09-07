@@ -6,7 +6,7 @@ import java.util.List;
 public class Works {
     private Integer Wid;
     private String Winfo;
-    private String Pic;
+        private String Pic;
     private Integer Mid;
     private Integer uid;
     private Date MakeTime;

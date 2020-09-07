@@ -18,7 +18,6 @@ public class LeavlMessageController {
     LeavlMessageService leavlMessageService;
     @RequestMapping("querymessageBymid")
     public List<LeavMessage> querymessageBymid(Integer mid){
-
         return leavlMessageService.querymessageBymid(mid);
     }
     @RequestMapping("querymessagereplyNonull")

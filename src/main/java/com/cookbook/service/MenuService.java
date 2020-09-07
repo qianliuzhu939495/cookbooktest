@@ -2,8 +2,6 @@ package com.cookbook.service;
 
 import com.cookbook.dao.*;
 import com.cookbook.entity.*;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

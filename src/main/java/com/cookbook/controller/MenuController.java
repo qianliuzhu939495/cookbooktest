@@ -2,7 +2,6 @@ package com.cookbook.controller;
 
 import com.cookbook.entity.Menu;
 import com.cookbook.service.MenuService;
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
