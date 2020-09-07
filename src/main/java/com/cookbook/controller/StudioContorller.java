@@ -5,6 +5,7 @@ import com.cookbook.dao.UserDao;
 import com.cookbook.entity.Studio;
 import com.cookbook.entity.StudioTypes;
 import com.cookbook.entity.Studio_message;
+import com.cookbook.service.StudioService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +19,8 @@ public class StudioContorller {
     StudioDao studioDao;
     @Resource
     UserDao userDao;
+    @Resource
+    StudioService studioService;
     @RequestMapping("queryTypes")
     public List<StudioTypes> queryTypes(){
         return studioDao.queryTypes();
@@ -80,5 +83,14 @@ public class StudioContorller {
     @RequestMapping("querystudiosales")
     public String querystudiosales(String sid){
         return String.valueOf(studioDao.querystudiosales(sid).size());
+    }
+    @RequestMapping("queryMyStudioMessage")
+    public List<Studio_message> queryMyStudioMessage(String uid){
+        return studioService.queryMyStudioMessage(uid);
+    }
+
+    @RequestMapping("updatemessageBysmid")
+    public int updatemessageBysmid(String smid){
+        return studioDao.updatemessageBysmid(smid);
     }
 }

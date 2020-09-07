@@ -1,10 +1,7 @@
 package com.cookbook.dao;
 
 import com.cookbook.entity.Works_message;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,4 +15,6 @@ public interface Works_messageDao {
     int delBywmid(Integer wmid);
     @Delete("delete from Works_message where upid=#{wmid}")
     int delByupid(Integer wmid);
+    @Update("update Works_message set state=1 where wmid=#{wmid}")
+    int updateworkstate(String wmid);
 }

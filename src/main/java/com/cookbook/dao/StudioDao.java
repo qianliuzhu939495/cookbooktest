@@ -4,6 +4,7 @@ import com.cookbook.entity.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -45,4 +46,9 @@ public interface StudioDao {
     //查询人购买该视频没
     @Select("select * from userturnover where uid=#{param1} and wid=#{param2}")
     UserTurnover queryPaysByid(String uid,String wid);
+    //查询我的所有视频的所有未读评论
+    @Select("select sm.* from studio_message sm inner join studio s on sm.sid=s.sid where s.uid=#{uid} and sm.state=0")
+    public List<Studio_message> queryMyStudioMessage(String uid);
+    @Update("update studio_message set state=1 where smid=#{smid}")
+    int updatemessageBysmid(String smid);
 }

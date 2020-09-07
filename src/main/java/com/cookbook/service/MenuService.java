@@ -114,4 +114,13 @@ public class MenuService {
         }
         return menus;
     }
+
+    public List<LeavMessage> queryMyMenuMessage(String uid){
+        List<LeavMessage> leavMessages = menuDao.queryMyMenuMessage(uid);
+        for(LeavMessage l:leavMessages){
+            l.setLeavUsers(userDao.querybyid(Integer.valueOf(l.getUid())));
+            l.setBemenu(menuDao.queryByid(String.valueOf(l.getMid())));
+        }
+        return leavMessages;
+    }
 }

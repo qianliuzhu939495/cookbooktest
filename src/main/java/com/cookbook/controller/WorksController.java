@@ -2,6 +2,7 @@ package com.cookbook.controller;
 
 import com.cookbook.dao.WorksDao;
 import com.cookbook.entity.Works;
+import com.cookbook.entity.Works_message;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.cookbook.entity.Works;
@@ -32,5 +33,9 @@ public class WorksController {
     @RequestMapping("queryOrderBytime")
     public List<Works> queryOrderBytime(Integer mid){
         return worksService.queryOrderBytime(mid);
+    }
+    @RequestMapping("queryMyWorksMessage")
+    public List<Works_message> queryMyWorksMessage(String uid){
+        return  worksService.queryMyWorksMessage(uid);
     }
 }

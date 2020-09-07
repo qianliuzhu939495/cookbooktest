@@ -1,8 +1,10 @@
 package com.cookbook.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
-
+@Table
 public class LeavMessage {
     private Integer lid;
     private String Info;
@@ -10,9 +12,19 @@ public class LeavMessage {
     private Integer Mid;
     private Integer State;
     private Date LeaveTime;
+    @Column
     private Users LeavUsers;
     private String reply;// -- 作者回复
     private Date replytime;// 回复时间
+    private Menu bemenu;
+
+    public Menu getBemenu() {
+        return bemenu;
+    }
+
+    public void setBemenu(Menu bemenu) {
+        this.bemenu = bemenu;
+    }
 
     public LeavMessage() {
     }

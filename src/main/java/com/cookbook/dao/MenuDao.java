@@ -1,10 +1,8 @@
 package com.cookbook.dao;
 
+import com.cookbook.entity.LeavMessage;
 import com.cookbook.entity.Menu;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -39,4 +37,11 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     public List<Menu> queryBymname(@Param("mname") String mname);
     @Select("select * from menu where pic=#{pic}")
     Menu querybypic(String pic);
+    @Select("select * from menu where mid=#{mid}")
+    Menu queryByid(String mid);
+    //查询关于我的菜谱的所有未读留言
+    @Select("select l.* from leavmessage l INNER JOIN menu m on l.mid=m.mid where m.uid=#{uid} and l.state=0")
+    List<LeavMessage> queryMyMenuMessage(String uid);
+    @Update("update leavmessage set state=1 where lid=#{lid}")
+    Integer updatestate(String lid);
 }

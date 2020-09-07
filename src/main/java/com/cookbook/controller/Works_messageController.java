@@ -1,5 +1,6 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.Works_messageDao;
 import com.cookbook.entity.Works_message;
 import com.cookbook.service.Works_messageService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +17,8 @@ import java.util.List;
 public class Works_messageController {
     @Resource
     Works_messageService works_messageService;
+    @Resource
+    Works_messageDao works_messageDao;
     @RequestMapping("querybywid")
     public List<Works_message> querybywid(Integer wid){
         return works_messageService.querybywid(wid);
@@ -27,5 +30,9 @@ public class Works_messageController {
     @RequestMapping("del")
     public int del(Integer wmid){
         return works_messageService.delete(wmid);
+    }
+    @RequestMapping("updateworkstate")
+    public int updateworkstate(String wmid){
+        return works_messageDao.updateworkstate(wmid);
     }
 }

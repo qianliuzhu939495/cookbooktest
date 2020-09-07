@@ -1,5 +1,7 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.MenuDao;
+import com.cookbook.entity.LeavMessage;
 import com.cookbook.entity.Menu;
 import com.cookbook.service.MenuService;
 import org.apache.ibatis.annotations.Insert;
@@ -16,6 +18,8 @@ import java.util.List;
 public class MenuController {
     @Resource
     MenuService menuService;
+    @Resource
+    MenuDao menuDao;
     @RequestMapping("queryThisMonth")
     public List<Menu> queryThisMonth(){
         return menuService.queryThisMonth();
@@ -48,4 +52,13 @@ public class MenuController {
         return menuService.queryBymname(mname);
     }
 
+    //queryMyMenuMessage
+    @RequestMapping("queryMyMenuMessage")
+    public List<LeavMessage> queryMyMenuMessage(String uid){
+        return menuService.queryMyMenuMessage(uid);
+    }
+    @RequestMapping("updatestate")
+    public Integer updatestate(String lid){
+        return menuDao.updatestate(lid);
+    }
 }

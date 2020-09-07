@@ -40,4 +40,12 @@ public class WorksService {
         }
         return works;
     }
+    public List<Works_message> queryMyWorksMessage(String uid){
+        List<Works_message> works_messages = worksDao.queryMyWorksMessage(uid);
+        for(Works_message w:works_messages){
+            w.setUsers(userDao.querybyid(Integer.valueOf(w.getUid())));
+        }
+        return works_messages;
+    }
+
 }
