@@ -1,5 +1,6 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.MenuDao;
 import com.cookbook.entity.Menu;
 import com.cookbook.service.MenuService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,8 @@ import java.util.List;
 public class MenuController {
     @Resource
     MenuService menuService;
+    @Resource
+    MenuDao menuDao;
     @RequestMapping("queryThisMonth")
     public List<Menu> queryThisMonth(){
         return menuService.queryThisMonth();
@@ -50,4 +53,9 @@ public class MenuController {
     public Menu querybymid(Integer mid){
         return menuService.querybymid(mid);
     }
+    @RequestMapping("queryAllByuid")
+    public List<Menu> queryAllByuid(Integer uid){
+        return menuDao.queryThreieMenus(uid);
+    }
+
 }

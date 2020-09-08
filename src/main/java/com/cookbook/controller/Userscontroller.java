@@ -124,4 +124,20 @@ public class Userscontroller {
         System.out.println(userTurnover==null);
         return userTurnover==null?"no":"yes";
     }
+
+    @RequestMapping("queryguanzhu")
+    @ResponseBody
+    public List<Users>  queryguanzhu(String uid){
+        return userDao.queryguanzhu(Integer.valueOf(uid));
+    }
+    @RequestMapping("querybeiguanzhu")
+    @ResponseBody
+    public List<Users>  querybeiguanzhu(String uid){
+        return userDao.querybeiguanzhu(Integer.valueOf(uid));
+    }
+    @RequestMapping("queryIsFollow")
+    @ResponseBody
+    public Integer queryIsFollow(String uid,String followid){
+        return userDao.queryIsFollow(uid,followid);
+    }
 }

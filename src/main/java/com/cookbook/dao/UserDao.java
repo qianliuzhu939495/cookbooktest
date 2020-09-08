@@ -1,12 +1,11 @@
 package com.cookbook.dao;
 
 import com.cookbook.entity.Menu;
-import com.cookbook.entity.User_menu;
 import com.cookbook.entity.User_studio;
 import com.cookbook.entity.Users;
 import org.apache.ibatis.annotations.*;
 
-import javax.persistence.Id;
+
 import java.util.List;
 
 @Mapper
@@ -43,5 +42,6 @@ public interface UserDao {
     void updateInfo(Users users);
     @Update("update users set pwd=#{param1} where uid=#{param2}")
     Integer msgUpdatePwd(String pwd,String uid);
-
+    @Select("select max(uid) from user_user where uid=#{param1} and followuid=#{param2}")
+    int queryIsFollow(String uid,String followuid);
 }
