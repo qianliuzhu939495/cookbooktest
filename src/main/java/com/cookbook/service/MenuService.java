@@ -120,4 +120,32 @@ public class MenuService {
         menu.setUsers(users);
         return menu;
     }
+    public Integer updateMenus(Menu menu){
+        try {
+            menuDao.updatemenuBymid(menu);
+            for(MaterialsDetail md:menu.getMaterialsDetails()){
+                menuDao.updatematerialsdetail(md);
+            }
+            for (MenuStep ms:menu.getMenuSteps()){
+                menuDao.updatemenustep(ms);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+        return 1;
+    }
+
+    public Integer deleteMenu(String mid){
+        try {
+            menuDao.deletemenuBymid(mid);
+            menuDao.deletematerialsdetail(mid);
+            menuDao.deletemenustep(mid);
+            menuDao.deleteMessage(mid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+        return 1;
+    }
 }

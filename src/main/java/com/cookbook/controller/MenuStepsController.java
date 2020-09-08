@@ -1,4 +1,4 @@
-package com.cookbook;
+package com.cookbook.controller;
 
 import com.cookbook.entity.MenuStep;
 import com.cookbook.service.MenuStepsService;

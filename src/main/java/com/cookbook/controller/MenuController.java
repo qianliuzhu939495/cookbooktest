@@ -1,9 +1,14 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.MaterialsDetailDao;
 import com.cookbook.dao.MenuDao;
+import com.cookbook.dao.MenuStepsDao;
+import com.cookbook.entity.MaterialsDetail;
 import com.cookbook.entity.Menu;
+import com.cookbook.entity.MenuStep;
 import com.cookbook.service.MenuService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +23,10 @@ public class MenuController {
     MenuService menuService;
     @Resource
     MenuDao menuDao;
+    @Resource
+    MenuStepsDao menuStepsDao;
+    @Resource
+    MaterialsDetailDao materialsDetailDao;
     @RequestMapping("queryThisMonth")
     public List<Menu> queryThisMonth(){
         return menuService.queryThisMonth();
@@ -57,5 +66,22 @@ public class MenuController {
     public List<Menu> queryAllByuid(Integer uid){
         return menuDao.queryThreieMenus(uid);
     }
-
+    //查询菜谱详情+步骤+用料
+    @RequestMapping("queryMenudetailBymid")
+    public Menu queryMenudetailBymid(Integer mid){
+        Menu querybymid = menuDao.querybymid(mid);
+        querybymid.setMenuSteps(menuStepsDao.queryBymid(mid));
+        querybymid.setMaterialsDetails(materialsDetailDao.queryBymid(mid));
+        return querybymid;
+    }
+    @RequestMapping("updateMenus")
+    public Integer updateMenus(@RequestBody Menu menu){
+        System.out.println(menu);
+       return menuService.updateMenus(menu);
+    }
+    @RequestMapping("deleteMenu")
+    public Integer deleteMenu(String mid){
+        System.out.println(mid);
+        return menuService.deleteMenu(mid);
+    }
 }

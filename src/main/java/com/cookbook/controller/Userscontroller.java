@@ -138,6 +138,18 @@ public class Userscontroller {
     @RequestMapping("queryIsFollow")
     @ResponseBody
     public Integer queryIsFollow(String uid,String followid){
+        System.out.println(uid +followid);
         return userDao.queryIsFollow(uid,followid);
+    }
+    @RequestMapping("Isfollows")
+    @ResponseBody
+    public Integer Isfollows(String uid,String followid){
+        return userDao.Isfollows(uid,followid);
+    }
+
+    @RequestMapping("saveIsfollows")
+    @ResponseBody
+    public Integer saveIsfollows(String uid,String followid){
+        return userDao.saveIsfollows(uid,followid);
     }
 }
