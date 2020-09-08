@@ -35,4 +35,8 @@ public class Works_messageController {
     public int updateworkstate(String wmid){
         return works_messageDao.updateworkstate(wmid);
     }
+    @RequestMapping("queryMessageByWid")
+    public List<Works_message> queryMessageByWid(Integer wid){
+        return works_messageDao.querybywid(wid,0);
+    }
 }

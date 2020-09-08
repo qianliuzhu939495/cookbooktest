@@ -16,7 +16,7 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     public List<Menu> queryupMonth();
     @Select("SELECT * FROM menu where state=0 ORDER BY MadeTime desc LIMIT 9")
     public List<Menu> queryNewMenu();
-    @Select("select * from menu where state=0 and uid=#{uid} order by MadeTime desc")
+    @Select("select * from menu where uid=#{uid} order by MadeTime desc")
     public List<Menu> querybyuid(Integer uid);
     @Select("SELECT * from(\n" +
             "SELECT *,(select count(*) from works w where w.mid=m.mid and day(w.MakeTime) BETWEEN day(NOW())-7 and day(NOW())) count from menu m ORDER BY count desc limit 999999) as a\n" +
@@ -42,4 +42,6 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
 
     @Select("select * from menu where mid=#{mid}")
     Menu querybymid(Integer mid);
+    @Select("select * from menu where state=0 and uid=#{uid} order by MadeTime desc")
+    public List<Menu> queryThreieMenus(Integer uid);
 }

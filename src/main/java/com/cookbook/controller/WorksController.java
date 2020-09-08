@@ -1,8 +1,7 @@
 package com.cookbook.controller;
 
 import com.cookbook.dao.WorksDao;
-import com.cookbook.entity.Works;
-import com.cookbook.entity.Works_message;
+import com.cookbook.entity.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.cookbook.service.WorksService;
@@ -39,5 +38,19 @@ public class WorksController {
     @RequestMapping("queryByWid")
     public Works queryByWid(Integer wid){
         return worksService.queryByWid(wid);
+    }
+    @RequestMapping("querybyuid")
+    public List<Works> querybyuid(String uid){
+        return worksDao.querybyuid(Integer.valueOf(uid));
+    }
+    @RequestMapping("queryAllBymid")
+    public List<Works> queryAllBymid(String mid){
+
+        return worksDao.querybymid(Integer.valueOf(mid));
+    }
+
+    @RequestMapping("queryStateBywid")
+    public List<Users> queryStateBywid(String wid){
+        return worksDao.querystartBywid(Integer.parseInt(wid));
     }
 }
