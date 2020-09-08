@@ -5,9 +5,7 @@ import com.cookbook.entity.Works;
 import com.cookbook.entity.Works_message;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.cookbook.entity.Works;
 import com.cookbook.service.WorksService;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,5 +35,9 @@ public class WorksController {
     @RequestMapping("queryMyWorksMessage")
     public List<Works_message> queryMyWorksMessage(String uid){
         return  worksService.queryMyWorksMessage(uid);
+    }
+    @RequestMapping("queryByWid")
+    public Works queryByWid(Integer wid){
+        return worksService.queryByWid(wid);
     }
 }

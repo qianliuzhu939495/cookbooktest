@@ -47,5 +47,14 @@ public class WorksService {
         }
         return works_messages;
     }
-
+    public Works queryByWid(Integer wid){
+        Works work = worksDao.queryByWid(wid);
+            Users user = userDao.querybyid(work.getUid());
+            work.setUser(user);
+        List<Users> users = worksDao.querystartBywid(work.getWid());
+        work.setStartUsers(users);
+        List<Works_message> messages = worksDao.queryworksmessage(work.getWid());
+        work.setWorks_messages(messages);
+        return work;
+    }
 }

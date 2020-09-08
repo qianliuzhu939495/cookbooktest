@@ -35,5 +35,6 @@ public interface WorksDao {
     //查询我的所有作品的维度评论
     @Select("select * from works_message wm inner join works w on wm.wid=w.wid where w.uid=#{uid} and wm.state=0")
     List<Works_message> queryMyWorksMessage(String uid);
-
+    @Select("select * from Works where wid=#{wid}")
+    public Works queryByWid(Integer wid);
 }
