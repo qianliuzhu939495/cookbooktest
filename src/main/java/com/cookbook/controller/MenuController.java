@@ -2,6 +2,7 @@ package com.cookbook.controller;
 
 import com.cookbook.dao.MenuDao;
 import com.cookbook.entity.LeavMessage;
+import com.cookbook.dao.MenuStepsDao;
 import com.cookbook.entity.Menu;
 import com.cookbook.service.MenuService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -67,4 +68,25 @@ public class MenuController {
     public List<Menu> querybymtid(Integer mtid){
         return menuService.querybymtid(mtid);
     }
+    @RequestMapping("queryusercollect")
+    public Integer queryusercollect(String mid,String uid){
+        return menuDao.queryusercollect(mid,uid);
+    }
+    @RequestMapping("updateCollection")
+    public Integer updateCollection(String mid,String uid){
+       try {
+           int queryusercollect = menuDao.queryusercollect(mid, uid);
+           if(queryusercollect>0){
+               menuDao.deleteCollection(mid,uid);
+               return 0;
+           }else{
+               menuDao.saveCollection(uid,mid);
+               return 1;
+           }
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+       return 1;
+    }
+
 }

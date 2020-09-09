@@ -1,11 +1,10 @@
 package com.cookbook.dao;
 
 import com.cookbook.entity.LeavMessage;
+import com.cookbook.entity.MaterialsDetail;
 import com.cookbook.entity.Menu;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.cookbook.entity.MenuStep;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -51,4 +50,28 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
 
     @Select(" SELECT * from menu where Mtid=#{mtid}")
     List<Menu> querybymtid(Integer mtid);
+    //修改菜谱和菜谱详情和步骤
+    @Update("update menu set mname=#{mname},pic=#{pic},info=#{info},mtid=#{mtid},state=#{state} where mid=#{mid}")
+    int updatemenuBymid(Menu menu);
+    @Update("update menustep set msinfo=#{msinfo},msnum=#{msnum},mspic=#{mspic} where msid=#{msid}")
+    int updatemenustep(MenuStep menuStep);
+    @Update("update materialsdetail set material=#{material},num=#{num} where mdid=#{mdid}")
+    int updatematerialsdetail(MaterialsDetail materialsDetail);
+
+    //删除菜谱和菜谱详情和步骤和留言
+    @Delete("delete from menu where mid=#{mid}")
+    int deletemenuBymid(String mid);
+    @Delete("delete from menustep where mid=#{mid}")
+    int deletemenustep(String mid);
+    @Delete("delete from materialsdetail  where mid=#{mid}")
+    int deletematerialsdetail(String mid);
+    @Delete("delete from leavmessage  where mid=#{mid}")
+    int deleteMessage(String mid);
+    //根据uid mid查询收藏否
+    @Select("select count(uid) from user_menu where mid=#{param1} and uid=#{param2}")
+    int queryusercollect(String mid,String uid);
+    @Insert("insert into user_menu values(#{param1},#{param2},NOW())")
+    int saveCollection(String uid,String mid);
+    @Delete("delete from user_menu where mid=#{param1} and uid=#{param2}")
+    int deleteCollection(String mid,String uid);
 }
