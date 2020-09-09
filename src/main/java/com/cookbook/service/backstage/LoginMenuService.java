@@ -6,10 +6,7 @@ import com.cookbook.entity.Functions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class LoginMenuService {
@@ -57,17 +54,18 @@ public class LoginMenuService {
         }
         return JSON.toJSONString(newList);
     }
-    public String queryOneMenu(Integer cid){
+    public String queryOneMenu(Integer rid,Integer cid){
         List<Map<String,Object>> functions = loginMenu.queryOneMenu(cid);//一级
         List<Map<String,Object>> mapAll = new ArrayList<>();
         //二级菜单数据
         for (int i= 0;i<functions.size();i++){
             Integer fid = (Integer) functions.get(i).get("parentFid");
+            Integer rids = (Integer) functions.get(i).get("Rid");
             Integer parentMenu = (Integer) functions.get(i).get("parentMenu");
             Integer parentFlevel = (Integer) functions.get(i).get("parentFlevel");
             if(parentMenu == parentFlevel){
                 Map<String,Object> map = new HashMap<>();
-                List<Functions> functions1 = loginMenu.queryTwoMenu(fid);
+                List<Functions> functions1 = loginMenu.queryTwoMenu(rids,fid);
                 map.put("childList",functions1);
                 mapAll.add(map);
             }
@@ -76,5 +74,33 @@ public class LoginMenuService {
         rs.put("childList",functions);
         rs.put("menu",mapAll);
         return JSON.toJSONString(rs);
+    }
+    public String queryMenoOne(){
+        List<Map<String, Object>> maps = loginMenu.queryMenuOne();
+        return JSON.toJSONString(maps);
+    }
+    public String queryMenoTwo(){
+        List<Map<String, Object>> maps = loginMenu.queryMenuOne();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (int i= 0;i<maps.size();i++){
+            Map<String,Object> mapp = new HashMap<>();
+            Integer fid = (Integer) maps.get(i).get("parentFid");
+                List<Map<String,Object>> functions = loginMenu.queryMenuTwo(fid);
+                mapp.put("childList",functions);
+                list.add(mapp);
+        }
+        return JSON.toJSONString(list);
+    }
+    public int changeRole(String arr){
+        /*String[] split = arr.split(",");*/
+        loginMenu.deleteMenuUser();
+        String substring = arr.substring(1, arr.length() - 1);
+        String[] split = substring.split(",");
+        for (int i = 0; i < split.length; i++) {
+            String s = split[i];
+            int Fid = Integer.parseInt(s);
+            loginMenu.insertMenuUser(Fid);
+        }
+        return 1;
     }
 }

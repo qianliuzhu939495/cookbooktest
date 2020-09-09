@@ -1,7 +1,7 @@
 
 pic:
-  picturePath: E:\school\vue\school\vue03\static\jpg
-  savePath: E:\school\vue\school\vue03\static\video
+  webPath: /images/
+  savePath: E:\school\java\SpringBoot\springBoot06\src\main\resources\videos
 
 #spring boot 默认文件上传大小
 spring:
