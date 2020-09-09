@@ -5,6 +5,7 @@ import com.cookbook.dao.UserDao;
 import com.cookbook.entity.Studio;
 import com.cookbook.entity.StudioTypes;
 import com.cookbook.entity.Studio_message;
+import com.cookbook.entity.UserTurnover;
 import com.cookbook.service.StudioService;
 import org.springframework.web.bind.annotation.*;
 
@@ -92,5 +93,32 @@ public class StudioContorller {
     @RequestMapping("updatemessageBysmid")
     public int updatemessageBysmid(String smid){
         return studioDao.updatemessageBysmid(smid);
+    }
+    @RequestMapping("queryPaysByids")
+    public String  queryPaysByid(String uid,String sid){
+        System.out.println(uid+sid);
+        UserTurnover userTurnover = studioDao.queryPaysByid(uid, sid);
+        System.out.println(userTurnover==null);
+        return userTurnover==null?"no":"yes";
+    }
+    @RequestMapping("queryMyLikes")
+    public int queryMyLikes(String uid,String sid){
+        return studioDao.queryLikeStudio(uid,sid);
+    }
+    @RequestMapping("updateMyLikes")
+    public int updateMyLikes(String uid,String sid){
+        try {
+            int i = studioDao.queryLikeStudio(uid, sid);
+            if(i>0){
+                studioDao.deleteLikeStudio(uid,sid);
+                return 0;
+            }else{
+                studioDao.saveLikeStudio(uid,sid);
+                return 1;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 1;
     }
 }

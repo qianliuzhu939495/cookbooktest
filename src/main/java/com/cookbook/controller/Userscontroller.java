@@ -116,14 +116,7 @@ public class Userscontroller {
         return querybyid;
     }
 
-    @RequestMapping("queryPaysByids")
-    @ResponseBody
-    public String  queryPaysByid(String uid,String sid){
-        System.out.println(uid+sid);
-        UserTurnover userTurnover = studioDao.queryPaysByid(uid, sid);
-        System.out.println(userTurnover==null);
-        return userTurnover==null?"no":"yes";
-    }
+
 
     @RequestMapping("queryguanzhu")
     @ResponseBody

@@ -62,4 +62,11 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     int deletematerialsdetail(String mid);
     @Delete("delete from leavmessage  where mid=#{mid}")
     int deleteMessage(String mid);
+    //根据uid mid查询收藏否
+    @Select("select count(uid) from user_menu where mid=#{param1} and uid=#{param2}")
+    int queryusercollect(String mid,String uid);
+    @Insert("insert into user_menu values(#{param1},#{param2},NOW())")
+    int saveCollection(String uid,String mid);
+    @Delete("delete from user_menu where mid=#{param1} and uid=#{param2}")
+    int deleteCollection(String mid,String uid);
 }
