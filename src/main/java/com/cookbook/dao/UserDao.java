@@ -54,4 +54,6 @@ public interface UserDao {
     int updateUserState(String uid);
     @Insert("insert into income(uid,shares,intime) values(uid,'2000',NOW())")
     int saveincome(String uid);
+    @Select("SELECT *,(select count(*) from user_user uu where uu.followuid=u.uid ) count from users u where u.state=1 ORDER BY count DESC LIMIT 9")
+    List<Users> queryMeiShiZuoJia();
 }

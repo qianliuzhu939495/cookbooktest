@@ -143,4 +143,12 @@ public class StudioContorller {
         }
         return 1;
     }
+    @RequestMapping("queryall")
+    public List<Studio> queryall(){
+        return studioDao.queryall();
+    }
+    @RequestMapping("queryByStid")
+    public List<Studio> queryByStid(Integer stid){
+        return studioDao.queryByStid(stid);
+    }
 }

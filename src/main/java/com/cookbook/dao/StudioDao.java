@@ -51,7 +51,7 @@ public interface StudioDao {
 
     @Select("SELECT * FROM Studio ORDER BY UpTime desc LIMIT 9")
     public List<Studio> querynewStudio();
-    @Select("SELECT *,(SELECT ROUND(AVG(sm.Start),2) from studio_message sm where sm.sid=s.sid) pingjun from studio s ORDER BY pingjun desc")
+    @Select("SELECT *,(SELECT ROUND(AVG(sm.Start),2) from studio_message sm where sm.sid=s.sid) pingjun from studio s ORDER BY pingjun desc LIMIT 9")
     public List<Studio> queryOrderBystart();
 
     @Select("select count(uid) from user_studio where uid=#{param1} and sid=#{param2}")
@@ -60,4 +60,8 @@ public interface StudioDao {
     int deleteLikeStudio(String uid,String sid);
     @Insert("insert into user_studio values(#{param1},#{param2},0)")
     int saveLikeStudio(String uid,String sid);
+    @Select("select * FROM Studio")
+    List<Studio> queryall();
+    @Select("select * FROM Studio where stid=#{stid}")
+    List<Studio> queryByStid(Integer stid);
 }

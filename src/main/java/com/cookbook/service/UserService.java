@@ -166,4 +166,14 @@ public class UserService {
         user.setUsers(guanzhu);
         return user;
     }
+    public List<Users> queryMeiShiZuoJia(){
+        List<Users> users = ud.queryMeiShiZuoJia();
+        for (Users user:users){
+            List<Users> querybeiguanzhu = ud.querybeiguanzhu(user.getUid());
+            user.setFollows(querybeiguanzhu);
+            List<Studio> studios = studioDao.queryMyStudio(user.getUid().toString());
+            user.setMystudio(studios);
+        }
+        return users;
+    }
 }
