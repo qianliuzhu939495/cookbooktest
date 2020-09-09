@@ -5,23 +5,26 @@ import java.util.Date;
 public class Studio_message {
     private Integer smid;
     private Integer sid;
-    private String Message;
+    private String message;
     private Integer Start;
     private Integer uid;
     private Integer State;
     private Date evaluateTime;
+    private Users leveluser;
 
-    public Studio_message(Integer smid, Integer sid, String message, Integer start, Integer uid, Integer state, Date evaluateTime) {
+
+    public Studio_message() {
+    }
+
+    public Studio_message(Integer smid, Integer sid, String message, Integer start, Integer uid, Integer state, Date evaluateTime, Users leveluser) {
         this.smid = smid;
         this.sid = sid;
-        Message = message;
+        this.message = message;
         Start = start;
         this.uid = uid;
         State = state;
         this.evaluateTime = evaluateTime;
-    }
-
-    public Studio_message() {
+        this.leveluser = leveluser;
     }
 
     public Integer getSmid() {
@@ -41,11 +44,11 @@ public class Studio_message {
     }
 
     public String getMessage() {
-        return Message;
+        return message;
     }
 
     public void setMessage(String message) {
-        Message = message;
+        this.message = message;
     }
 
     public Integer getStart() {
@@ -80,16 +83,25 @@ public class Studio_message {
         this.evaluateTime = evaluateTime;
     }
 
+    public Users getLeveluser() {
+        return leveluser;
+    }
+
+    public void setLeveluser(Users leveluser) {
+        this.leveluser = leveluser;
+    }
+
     @Override
     public String toString() {
         return "Studio_message{" +
                 "smid=" + smid +
                 ", sid=" + sid +
-                ", Message='" + Message + '\'' +
+                ", message='" + message + '\'' +
                 ", Start=" + Start +
                 ", uid=" + uid +
                 ", State=" + State +
                 ", evaluateTime=" + evaluateTime +
+                ", leveluser=" + leveluser +
                 '}';
     }
 }

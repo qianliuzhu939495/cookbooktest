@@ -1,19 +1,18 @@
 package com.cookbook.entity;
 
-import org.omg.CORBA.INTERNAL;
 
 public class MenuStep {
     private Integer Msid;
     private String msinfo;
     private Integer Msnum;
-    private String MsPic;
+    private String mspic;
     private Integer Mid;
 
     public MenuStep(Integer msid, String msinfo, Integer msnum, String msPic, Integer mid) {
         Msid = msid;
         this.msinfo = msinfo;
         Msnum = msnum;
-        MsPic = msPic;
+        mspic = msPic;
         Mid = mid;
     }
 
@@ -44,12 +43,12 @@ public class MenuStep {
         Msnum = msnum;
     }
 
-    public String getMsPic() {
-        return MsPic;
+    public String getmspic() {
+        return mspic;
     }
 
-    public void setMsPic(String msPic) {
-        MsPic = msPic;
+    public void setmspic(String msPic) {
+        mspic = msPic;
     }
 
     public Integer getMid() {
@@ -66,7 +65,7 @@ public class MenuStep {
                 "Msid=" + Msid +
                 ", msinfo='" + msinfo + '\'' +
                 ", Msnum=" + Msnum +
-                ", MsPic='" + MsPic + '\'' +
+                ", mspic='" + mspic + '\'' +
                 ", Mid=" + Mid +
                 '}';
     }

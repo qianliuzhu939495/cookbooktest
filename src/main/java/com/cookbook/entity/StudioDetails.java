@@ -1,71 +1,71 @@
 package com.cookbook.entity;
 
 public class StudioDetails {
-    private Integer Sdid;
-    private String sInfo;
-    private String sUrl;
-    private Integer State;
-    private Integer Sid;
-
-    public StudioDetails(Integer sdid, String sInfo, String sUrl, Integer state, Integer sid) {
-        Sdid = sdid;
-        this.sInfo = sInfo;
-        this.sUrl = sUrl;
-        State = state;
-        Sid = sid;
-    }
+    private Integer sdid;
+    private String sinfo;
+    private String surl;
+    private Integer state;
+    private Integer sid;
 
     public StudioDetails() {
     }
 
+    public StudioDetails(Integer sdid, String sinfo, String surl, Integer state, Integer sid) {
+        this.sdid = sdid;
+        this.sinfo = sinfo;
+        this.surl = surl;
+        this.state = state;
+        this.sid = sid;
+    }
+
     public Integer getSdid() {
-        return Sdid;
+        return sdid;
     }
 
     public void setSdid(Integer sdid) {
-        Sdid = sdid;
+        this.sdid = sdid;
     }
 
-    public String getsInfo() {
-        return sInfo;
+    public String getSinfo() {
+        return sinfo;
     }
 
-    public void setsInfo(String sInfo) {
-        this.sInfo = sInfo;
+    public void setSinfo(String sinfo) {
+        this.sinfo = sinfo;
     }
 
-    public String getsUrl() {
-        return sUrl;
+    public String getSurl() {
+        return surl;
     }
 
-    public void setsUrl(String sUrl) {
-        this.sUrl = sUrl;
+    public void setSurl(String surl) {
+        this.surl = surl;
     }
 
     public Integer getState() {
-        return State;
+        return state;
     }
 
     public void setState(Integer state) {
-        State = state;
+        this.state = state;
     }
 
     public Integer getSid() {
-        return Sid;
+        return sid;
     }
 
     public void setSid(Integer sid) {
-        Sid = sid;
+        this.sid = sid;
     }
 
     @Override
     public String toString() {
         return "StudioDetails{" +
-                "Sdid=" + Sdid +
-                ", sInfo='" + sInfo + '\'' +
-                ", sUrl='" + sUrl + '\'' +
-                ", State=" + State +
-                ", Sid=" + Sid +
+                "sdid=" + sdid +
+                ", sinfo='" + sinfo + '\'' +
+                ", surl='" + surl + '\'' +
+                ", state=" + state +
+                ", sid=" + sid +
                 '}';
     }
 }

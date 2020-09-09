@@ -20,4 +20,16 @@ public class UController {
     public List<Users> queryuserinfo(){
         return userService.queryuserinfo();
     }
+    @RequestMapping("queryBylikeUname")
+    public List<Users> queryBylikeUname(String uname){
+        return userService.queryBylikeUname(uname);
+    }
+    @RequestMapping("querybyid")
+    public Users querybyid(Integer uid){
+        return userService.querybyuid(uid);
+    }
+    @RequestMapping("queryUser")
+    public Users queryUser(Integer uid){
+        return userService.queryUser(uid);
+    }
 }

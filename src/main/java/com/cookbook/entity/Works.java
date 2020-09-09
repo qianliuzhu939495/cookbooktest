@@ -6,16 +6,17 @@ import java.util.List;
 public class Works {
     private Integer Wid;
     private String Winfo;
-    private String Pic;
+        private String Pic;
     private Integer Mid;
     private Integer uid;
     private Date MakeTime;
     private List<Works_message> works_messages;
     private List<Users> startUsers; //点赞人
+    private Users user;
     public Works() {
     }
 
-    public Works(Integer wid, String winfo, String pic, Integer mid, Integer uid, Date makeTime, List<Works_message> works_messages, List<Users> startUsers) {
+    public Works(Integer wid, String winfo, String pic, Integer mid, Integer uid, Date makeTime, List<Works_message> works_messages, List<Users> startUsers, Users user) {
         Wid = wid;
         Winfo = winfo;
         Pic = pic;
@@ -24,6 +25,15 @@ public class Works {
         MakeTime = makeTime;
         this.works_messages = works_messages;
         this.startUsers = startUsers;
+        this.user = user;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public Integer getWid() {
@@ -101,6 +111,7 @@ public class Works {
                 ", MakeTime=" + MakeTime +
                 ", works_messages=" + works_messages +
                 ", startUsers=" + startUsers +
+                ", user=" + user +
                 '}';
     }
 }

@@ -1,8 +1,10 @@
 package com.cookbook.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
-
+@Table
 public class LeavMessage {
     private Integer lid;
     private String Info;
@@ -10,19 +12,38 @@ public class LeavMessage {
     private Integer Mid;
     private Integer State;
     private Date LeaveTime;
-    private List<Users> LeavUsers;
+    @Column
+    private Users LeavUsers;
+    private String reply;// -- 作者回复
+    private Date replytime;// 回复时间
+    private Menu bemenu;
+
+    public Menu getBemenu() {
+        return bemenu;
+    }
+
+    public void setBemenu(Menu bemenu) {
+        this.bemenu = bemenu;
+    }
 
     public LeavMessage() {
     }
 
-    public LeavMessage(Integer lid, String info, Integer uid, Integer mid, Integer state, Date leaveTime, List<Users> leavUsers) {
-        this.lid = lid;
-        Info = info;
-        this.uid = uid;
-        Mid = mid;
-        State = state;
-        LeaveTime = leaveTime;
-        LeavUsers = leavUsers;
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
+    public Date getReplytime() {
+        return replytime;
+    }
+
+    public void setReplytime(Date replytime) {
+        this.replytime = replytime;
     }
 
     public Integer getLid() {
@@ -73,12 +94,24 @@ public class LeavMessage {
         LeaveTime = leaveTime;
     }
 
-    public List<Users> getLeavUsers() {
+    public Users getLeavUsers() {
         return LeavUsers;
     }
 
-    public void setLeavUsers(List<Users> leavUsers) {
+    public void setLeavUsers(Users leavUsers) {
         LeavUsers = leavUsers;
+    }
+
+    public LeavMessage(Integer lid, String info, Integer uid, Integer mid, Integer state, Date leaveTime, Users leavUsers, String reply, Date replytime) {
+        this.lid = lid;
+        Info = info;
+        this.uid = uid;
+        Mid = mid;
+        State = state;
+        LeaveTime = leaveTime;
+        LeavUsers = leavUsers;
+        this.reply = reply;
+        this.replytime = replytime;
     }
 
     @Override
@@ -91,6 +124,8 @@ public class LeavMessage {
                 ", State=" + State +
                 ", LeaveTime=" + LeaveTime +
                 ", LeavUsers=" + LeavUsers +
+                ", reply='" + reply + '\'' +
+                ", replytime=" + replytime +
                 '}';
     }
 }

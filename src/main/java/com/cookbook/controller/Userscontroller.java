@@ -1,18 +1,17 @@
 package com.cookbook.controller;
 
-import com.cookbook.entity.Menu;
-import com.cookbook.entity.Users;
-import com.cookbook.entity.Works;
+import com.cookbook.dao.StudioDao;
+import com.cookbook.dao.UserDao;
+import com.cookbook.entity.*;
 import com.cookbook.service.UserService;
+
 import com.cookbook.util.Sms_util;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @Controller
@@ -20,6 +19,10 @@ public class Userscontroller {
     int mobile_code=1024;
     @Resource
     UserService userService;
+    @Resource
+    UserDao userDao;
+    @Resource
+    StudioDao studioDao;
     @RequestMapping("SMS")
     @ResponseBody
     public String SMS(String phone){
@@ -75,5 +78,78 @@ public class Userscontroller {
     @ResponseBody
     public List<Works> queryworkstartmessage(String uid){
         return userService.queryworkstartmessage(Integer.valueOf(uid));
+    }
+    @RequestMapping("queryusercollectedmenu")
+    @ResponseBody
+    public List<Menu> queryusercollectedmenu(String uid){
+        return userService.queryusercollectedmenu(Integer.valueOf(uid));
+    }
+
+    @RequestMapping("updateInfo")
+    @ResponseBody
+    void updateInfo(@RequestBody Users users){
+        userDao.updateInfo(users);
+    }
+
+    @RequestMapping("MsgUpdatePwd")
+    @ResponseBody
+    public String MsgUpdatePwd(@RequestBody Map<String,String> map){
+        System.out.println(map.get("phone")+","+map.get("msg")+","+map.get("pwd"));
+        if(!String.valueOf(mobile_code).equals(map.get("msg"))){
+            return null;
+        }
+        try {
+            Users users = userService.queryByphone(map.get("phone"));
+           userDao.msgUpdatePwd(map.get("pwd"), String.valueOf(users.getUid()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return "ok";
+        }
+    }
+    @RequestMapping("studioQueryuser")
+    @ResponseBody //查询课程作者
+    public Users studioQueryuser(String uid){
+        System.out.println(uid);
+        Users querybyid = userDao.querybyid(Integer.valueOf(uid));
+        System.out.println(querybyid);
+        return querybyid;
+    }
+
+    @RequestMapping("queryPaysByids")
+    @ResponseBody
+    public String  queryPaysByid(String uid,String sid){
+        System.out.println(uid+sid);
+        UserTurnover userTurnover = studioDao.queryPaysByid(uid, sid);
+        System.out.println(userTurnover==null);
+        return userTurnover==null?"no":"yes";
+    }
+
+    @RequestMapping("queryguanzhu")
+    @ResponseBody
+    public List<Users>  queryguanzhu(String uid){
+        return userDao.queryguanzhu(Integer.valueOf(uid));
+    }
+    @RequestMapping("querybeiguanzhu")
+    @ResponseBody
+    public List<Users>  querybeiguanzhu(String uid){
+        return userDao.querybeiguanzhu(Integer.valueOf(uid));
+    }
+    @RequestMapping("queryIsFollow")
+    @ResponseBody
+    public Integer queryIsFollow(String uid,String followid){
+        System.out.println(uid +followid);
+        return userDao.queryIsFollow(uid,followid);
+    }
+    @RequestMapping("Isfollows")
+    @ResponseBody
+    public Integer Isfollows(String uid,String followid){
+        return userDao.Isfollows(uid,followid);
+    }
+
+    @RequestMapping("saveIsfollows")
+    @ResponseBody
+    public Integer saveIsfollows(String uid,String followid){
+        return userDao.saveIsfollows(uid,followid);
     }
 }
