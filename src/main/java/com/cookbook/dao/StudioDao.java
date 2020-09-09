@@ -51,4 +51,9 @@ public interface StudioDao {
     public List<Studio_message> queryMyStudioMessage(String uid);
     @Update("update studio_message set state=1 where smid=#{smid}")
     int updatemessageBysmid(String smid);
+
+    @Select("SELECT * FROM Studio ORDER BY UpTime desc LIMIT 9")
+    public List<Studio> querynewStudio();
+    @Select("SELECT *,(SELECT ROUND(AVG(sm.Start),2) from studio_message sm where sm.sid=s.sid) pingjun from studio s ORDER BY pingjun desc")
+    public List<Studio> queryOrderBystart();
 }

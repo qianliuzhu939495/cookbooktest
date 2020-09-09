@@ -53,7 +53,7 @@ public class MenuService {
     public List<Menu> querybymtidorderliuxing(Integer mtid) {
         List<Menu> menus = menuDao.querybymtidorderliuxing(mtid);
         for (Menu menu:menus){
-            List<Works> works = worksDao.querySevenWork(menu.getMid());
+            List<Works> works = worksDao.querybymid(menu.getMid());
             menu.setWorks(works);
             List<MaterialsDetail> materialsDetails = materialsDetailDao.queryBymid(menu.getMid());
             menu.setMaterialsDetails(materialsDetails);
@@ -114,10 +114,31 @@ public class MenuService {
     }
     public Menu querybymid(Integer mid){
         Menu menu = menuDao.querybymid(mid);
-        List<Works> works = worksDao.querybymid(menu.getMid());
-        menu.setWorks(works);
-        Users users = userDao.querybyid(menu.getUid());
-        menu.setUsers(users);
+        System.out.println(menu);
+        if (menu!=null) {
+            List<Works> works = worksDao.querybymid(menu.getMid());
+            menu.setWorks(works);
+            Users users = userDao.querybyid(menu.getUid());
+            menu.setUsers(users);
+        }
         return menu;
+    }
+    public List<LeavMessage> queryLeavMessage(Integer uid){
+        List<LeavMessage> leavMessages = menuDao.queryLeavMessage(uid);
+        for (LeavMessage leavMessage:leavMessages){
+            Users user = userDao.querybyid(leavMessage.getUid());
+            leavMessage.setLeavUsers(user);
+        }
+        return leavMessages;
+    }
+    public List<Menu> querybymtid(Integer mtid){
+        List<Menu> menus = menuDao.querybymtid(mtid);
+        for (Menu menu:menus){
+            List<Works> works = worksDao.querybymid(menu.getMid());
+            menu.setWorks(works);
+            Users users = userDao.querybyid(menu.getUid());
+            menu.setUsers(users);
+        }
+        return menus;
     }
 }

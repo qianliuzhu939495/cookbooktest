@@ -1,6 +1,7 @@
 package com.cookbook.controller;
 
 import com.cookbook.dao.MenuDao;
+import com.cookbook.entity.LeavMessage;
 import com.cookbook.entity.Menu;
 import com.cookbook.service.MenuService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,11 +52,19 @@ public class MenuController {
     }
     @RequestMapping("querybymid")
     public Menu querybymid(Integer mid){
+        System.out.println(mid);
         return menuService.querybymid(mid);
     }
     @RequestMapping("queryAllByuid")
     public List<Menu> queryAllByuid(Integer uid){
         return menuDao.queryThreieMenus(uid);
     }
-
+    @RequestMapping("queryMyMenuMessage")
+    public List<LeavMessage> queryMyMenuMessage(Integer uid){
+        return menuService.queryLeavMessage(uid);
+    }
+    @RequestMapping("querybymtid")
+    public List<Menu> querybymtid(Integer mtid){
+        return menuService.querybymtid(mtid);
+    }
 }

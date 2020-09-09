@@ -28,4 +28,7 @@ public class StudioService {
         }
         return studio_messages;
     }
+    public List<Studio> querynewStudio(){
+        return studioDao.querynewStudio();
+    }
 }

@@ -1,5 +1,6 @@
 package com.cookbook.dao;
 
+import com.cookbook.entity.LeavMessage;
 import com.cookbook.entity.Menu;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -44,4 +45,10 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     Menu querybymid(Integer mid);
     @Select("select * from menu where state=0 and uid=#{uid} order by MadeTime desc")
     public List<Menu> queryThreieMenus(Integer uid);
+    //查看给作者的菜谱留言
+    @Select("select lm.* from LeavMessage lm inner join menu m on lm.mid=m.mid where m.uid=#{uid} and lm.state=0")
+    public List<LeavMessage> queryLeavMessage(Integer uid);
+
+    @Select(" SELECT * from menu where Mtid=#{mtid}")
+    List<Menu> querybymtid(Integer mtid);
 }

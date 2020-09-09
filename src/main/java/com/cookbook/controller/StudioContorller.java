@@ -1,6 +1,7 @@
 package com.cookbook.controller;
 
 import com.cookbook.dao.StudioDao;
+import com.cookbook.dao.Studio_MessageDao;
 import com.cookbook.dao.UserDao;
 import com.cookbook.entity.Studio;
 import com.cookbook.entity.StudioTypes;
@@ -21,6 +22,8 @@ public class StudioContorller {
     UserDao userDao;
     @Resource
     StudioService studioService;
+    @Resource
+    Studio_MessageDao studio_messageDao;
     @RequestMapping("queryTypes")
     public List<StudioTypes> queryTypes(){
         return studioDao.queryTypes();
@@ -92,5 +95,24 @@ public class StudioContorller {
     @RequestMapping("updatemessageBysmid")
     public int updatemessageBysmid(String smid){
         return studioDao.updatemessageBysmid(smid);
+    }
+    @RequestMapping("querynewStudio")
+    public List<Studio> querynewStudio(){
+
+        return studioDao.querynewStudio();
+    }
+    @RequestMapping("queryOrderBystart")
+    public List<Studio> queryOrderBystart(){
+
+        return studioDao.queryOrderBystart();
+    }
+    @RequestMapping("queryAvg")
+    public Integer queryAvg(Integer sid){
+        Integer avg = studio_messageDao.queryAvg(sid);
+        if (avg==null){
+            return 0;
+        }
+        System.out.println(avg);
+        return avg;
     }
 }
