@@ -1,6 +1,5 @@
 package com.cookbook.entity;
 
-import org.omg.CORBA.INTERNAL;
 
 public class MenuStep {
     private Integer Msid;

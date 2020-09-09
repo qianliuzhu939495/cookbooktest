@@ -15,9 +15,7 @@ public class LoginController {
     @Resource
     LoginService loginService;
     @RequestMapping("Login")
-    public List<Customer> login(String Lognum,String Pwd){
-        System.out.println(Lognum);
-        System.out.println(Pwd);
+    public Customer login(String Lognum,String Pwd){
         System.out.println(loginService.Login(Lognum, Pwd));
         return loginService.Login(Lognum, Pwd);
     }

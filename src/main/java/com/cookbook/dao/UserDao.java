@@ -42,6 +42,10 @@ public interface UserDao {
     void updateInfo(Users users);
     @Update("update users set pwd=#{param1} where uid=#{param2}")
     Integer msgUpdatePwd(String pwd,String uid);
-    @Select("select max(uid) from user_user where uid=#{param1} and followuid=#{param2}")
+    @Select("select count(*) from user_user where uid=#{param1} and followuid=#{param2}")
     int queryIsFollow(String uid,String followuid);
+    @Delete("delete from user_user where uid=#{param1} and followuid=#{param2}")
+    int Isfollows(String uid,String followuid);
+    @Insert("insert into user_user values(#{param1},#{param2})")
+    int saveIsfollows(String uid,String followuid);
 }
