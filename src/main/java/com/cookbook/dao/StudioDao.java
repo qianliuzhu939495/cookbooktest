@@ -58,6 +58,13 @@ public interface StudioDao {
     int queryLikeStudio(String uid,String sid);
     @Delete("delete from user_studio where uid=#{param1} and sid=#{param2}")
     int deleteLikeStudio(String uid,String sid);
-    @Insert("insert into user_studio values(#{param1},#{param2},0)")
+    @Insert("insert into user_studio values(#{param1},#{param2},NOW())")
     int saveLikeStudio(String uid,String sid);
+
+
+    // 添加我购买的 和 他卖出的
+    @Insert("insert into userturnover(uid,wid,pay,income,madetime) values(#{param1},#{param2},#{param3},0,NOW())")
+    int savePay(String uid,String sid,double pay);
+    @Insert("insert into userturnover(uid,wid,pay,income,madetime) values(#{param1},#{param2},0,#{param3},NOW())")
+    int saveIncome(String uid,String sid,double income);
 }

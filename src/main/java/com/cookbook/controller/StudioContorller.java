@@ -120,7 +120,7 @@ public class StudioContorller {
     public String  queryPaysByid(String uid,String sid){
         System.out.println(uid+sid);
         UserTurnover userTurnover = studioDao.queryPaysByid(uid, sid);
-        System.out.println(userTurnover==null);
+        System.out.println("userTurnover"+userTurnover);
         return userTurnover==null?"no":"yes";
     }
     @RequestMapping("queryMyLikes")

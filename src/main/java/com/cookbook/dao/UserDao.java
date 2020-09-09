@@ -50,8 +50,8 @@ public interface UserDao {
     int saveIsfollows(String uid,String followuid);
 
     //成为作家
-    @Update("update user set state=1 where uid=#{uid}")
+    @Update("update users set state=1 where uid=#{uid}")
     int updateUserState(String uid);
-    @Insert("insert into income(uid,shares,intime) values(uid,'2000',NOW())")
+    @Insert("insert into income(uid,shares,intime) values(#{uid},'2000',NOW())")
     int saveincome(String uid);
 }

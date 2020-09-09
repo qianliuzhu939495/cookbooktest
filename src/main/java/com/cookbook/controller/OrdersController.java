@@ -1,6 +1,8 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.StudioDao;
 import com.cookbook.dao.UserDao;
+import com.cookbook.entity.Studio;
 import com.cookbook.util.AlipayConfig;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +29,28 @@ public class OrdersController {
    @RequestMapping("saveIncome")
    @ResponseBody
    public Integer saveIncome(String uid){
-      System.out.println(uid+",.");
       try {
-         userDao.updateUserState(uid);
-         userDao.saveincome(uid);
-         return 1;
+         int i = userDao.updateUserState(uid);
+         System.out.println(i);
+         int saveincome = userDao.saveincome(uid);
+         System.out.println(saveincome);
+         return 2;
+      }catch (Exception e){
+         e.printStackTrace();
+      }
+      return 0;
+   }
+   @Resource
+    StudioDao studioDao;
+   @RequestMapping("saveuserturnover")
+   @ResponseBody
+   public Integer saveuserturnover(String uid,String sid){
+      try {
+         // 添加我购买的 和 他卖出的
+          Studio studio = studioDao.queryByid(sid);
+          studioDao.savePay(uid,sid,studio.getMoney());
+          studioDao.saveIncome(String.valueOf(studio.getUid()),sid,studio.getMoney());
+          return 2;
       }catch (Exception e){
          e.printStackTrace();
       }
@@ -39,13 +58,14 @@ public class OrdersController {
    }
    @RequestMapping("pay")
    @ResponseBody
-    public void pay(String order_number,String bnbname,String order_price, HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void pay(String order_number,String bnbname,String order_price,String sid,String state, HttpServletRequest request, HttpServletResponse response) throws IOException{
        //获得初始化的AlipayClient
        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl,AlipayConfig.app_id,AlipayConfig.merchant_private_key,"json",AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
-
+      System.out.println(state+"state");
+       System.out.println(sid+"sid");
        //设置请求参数
        AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-       alipayRequest.setReturnUrl(AlipayConfig.return_url);
+       alipayRequest.setReturnUrl(AlipayConfig.return_url+state+"&sid="+sid);
        alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 
 
