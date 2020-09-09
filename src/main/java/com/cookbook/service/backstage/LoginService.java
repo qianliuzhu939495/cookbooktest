@@ -11,7 +11,7 @@ import java.util.List;
 public class LoginService {
     @Resource
     LoginDao loginDao;
-    public List<Customer> Login(String Lognum,String Pwd){
+    public Customer Login(String Lognum,String Pwd){
         return loginDao.Login(Lognum,Pwd);
     }
     public List<Customer> queryByCid(Integer cid){

@@ -12,7 +12,7 @@ public interface backmenuDao {
     List<Functions> queryFunction();
     @Update("update functions set Fname=#{Fname} where Fid = #{Fid}")
     int updateFunctions(@Param("Fname") String Fname, @Param("Fid") Integer Fid);
-    @Select("select c.*,role.rname from customer c inner join customer_role on c.cid = customer_role.cid INNER JOIN role on customer_role.Rid = role.Rid")
+    @Select("select c.*,role.rname,role.Rid from customer c inner join customer_role on c.cid = customer_role.cid INNER JOIN role on customer_role.Rid = role.Rid where role.Rid = 2")
     @Results(id = "roles",value = {
             @Result(column = "Rname",property = "roles.Rname"),
     })
