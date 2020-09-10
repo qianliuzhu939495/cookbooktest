@@ -50,9 +50,9 @@ public interface UserDao {
     int saveIsfollows(String uid,String followuid);
 
     //成为作家
-    @Update("update user set state=1 where uid=#{uid}")
+    @Update("update users set state=1 where uid=#{uid}")
     int updateUserState(String uid);
-    @Insert("insert into income(uid,shares,intime) values(uid,'2000',NOW())")
+    @Insert("insert into income(uid,shares,intime) values(#{uid},'2000',NOW())")
     int saveincome(String uid);
     @Select("SELECT *,(select count(*) from user_user uu where uu.followuid=u.uid ) count from users u where u.state=1 ORDER BY count DESC LIMIT 9")
     List<Users> queryMeiShiZuoJia();

@@ -26,32 +26,36 @@ public class UserService {
     @Resource
     StudioDao studioDao;
     public Users quryByPwd(String phone, String pwd){
-        Users users = ud.queryByPwd(phone, pwd);
-        System.out.println(users);
-        if(null!=users) {
-            Integer uid = users.getUid();
-            users.setUsers(ud.queryguanzhu(uid));
-            users.setFollows(ud.querybeiguanzhu(uid));
-            List<Menu> menus1 = ud.queryLikemenu(uid);
-            System.out.println(menus1);
-            users.setUser_menus(menus1);
-            users.setUser_studios(ud.queryLikestudios(uid));
-            List<Menu> menus = menuDao.querybyuid(uid);
-            for(Menu m:menus){
-                m.setWorks(worksDao.querybymid(m.getMid()));
-                m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
+        try {
+            Users users = ud.queryByPwd(phone, pwd);
+            System.out.println(users);
+            if(null!=users) {
+                Integer uid = users.getUid();
+                users.setUsers(ud.queryguanzhu(uid));
+                users.setFollows(ud.querybeiguanzhu(uid));
+                List<Menu> menus1 = ud.queryLikemenu(uid);
+                users.setUser_menus(menus1);
+                users.setUser_studios(ud.queryLikestudios(uid));
+                List<Menu> menus = menuDao.querybyuid(uid);
+                for(Menu m:menus){
+                    m.setWorks(worksDao.querybymid(m.getMid()));
+                    m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
+                }
+                users.setMunus(menus);
+                List<Works> works = worksDao.querybyuidtwo(uid);
+                for(Works w:works){
+                    w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
+                    w.setStartUsers(worksDao.querystartBywid(w.getWid()));
+                }
+                users.setWorks(works);
+                users.setMystudio(studioOrder.queryBypay(uid));
+                users.setMystudio(studioOrder.queryByincome(uid));
             }
-            users.setMunus(menus);
-            List<Works> works = worksDao.querybyuidtwo(uid);
-            for(Works w:works){
-                w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
-                w.setStartUsers(worksDao.querystartBywid(w.getWid()));
-            }
-            users.setWorks(works);
-            users.setMystudio(studioOrder.queryBypay(uid));
-            users.setMystudio(studioOrder.queryByincome(uid));
+            return users;
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        return users;
+        return null;
     }
     public Users queryByphone(String phone){
         Users users = ud.queryByMsg(phone);

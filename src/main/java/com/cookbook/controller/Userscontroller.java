@@ -33,6 +33,7 @@ public class Userscontroller {
     @RequestMapping("quryByPwd")
     @ResponseBody
     public Users quryByPwd(@RequestBody Users users){
+        System.out.println(users);
         return userService.quryByPwd(users.getPhone(),users.getPwd());
     }
     @RequestMapping("queryByphone")
@@ -144,5 +145,10 @@ public class Userscontroller {
     @ResponseBody
     public Integer saveIsfollows(String uid,String followid){
         return userDao.saveIsfollows(uid,followid);
+    }
+    @RequestMapping("queryUserById")
+    @ResponseBody
+    public Users queryUserById(String uid){
+        return userDao.querybyid(Integer.valueOf(uid));
     }
 }
