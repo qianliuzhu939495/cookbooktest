@@ -1,5 +1,6 @@
 package com.cookbook.dao;
 
+import com.cookbook.entity.LeavMessage;
 import com.cookbook.entity.MaterialsDetail;
 import com.cookbook.entity.Menu;
 import com.cookbook.entity.MenuStep;
@@ -43,8 +44,12 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     Menu querybymid(Integer mid);
     @Select("select * from menu where state=0 and uid=#{uid} order by MadeTime desc")
     public List<Menu> queryThreieMenus(Integer uid);
+    //查看给作者的菜谱留言
+    @Select("select lm.* from LeavMessage lm inner join menu m on lm.mid=m.mid where m.uid=#{uid} and lm.state=0")
+    public List<LeavMessage> queryLeavMessage(Integer uid);
 
-
+    @Select(" SELECT * from menu where Mtid=#{mtid}")
+    List<Menu> querybymtid(Integer mtid);
     //修改菜谱和菜谱详情和步骤
     @Update("update menu set mname=#{mname},pic=#{pic},info=#{info},mtid=#{mtid},state=#{state} where mid=#{mid}")
     int updatemenuBymid(Menu menu);
@@ -62,4 +67,11 @@ public interface MenuDao extends tk.mybatis.mapper.common.Mapper<Menu> {
     int deletematerialsdetail(String mid);
     @Delete("delete from leavmessage  where mid=#{mid}")
     int deleteMessage(String mid);
+    //根据uid mid查询收藏否
+    @Select("select count(uid) from user_menu where mid=#{param1} and uid=#{param2}")
+    int queryusercollect(String mid,String uid);
+    @Insert("insert into user_menu values(#{param1},#{param2},NOW())")
+    int saveCollection(String uid,String mid);
+    @Delete("delete from user_menu where mid=#{param1} and uid=#{param2}")
+    int deleteCollection(String mid,String uid);
 }

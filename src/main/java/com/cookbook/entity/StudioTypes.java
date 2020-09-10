@@ -7,15 +7,25 @@ public class StudioTypes {
     private String Stname;
     private Integer sLevel;
     private List<Studio> studios;
+    private List<StudioTypes> studioTypes;
 
-    public StudioTypes(Integer stid, String stname, Integer sLevel, List<Studio> studios) {
+    public StudioTypes(Integer stid, String stname, Integer sLevel, List<Studio> studios, List<StudioTypes> studioTypes) {
         Stid = stid;
         Stname = stname;
         this.sLevel = sLevel;
         this.studios = studios;
+        this.studioTypes = studioTypes;
     }
 
     public StudioTypes() {
+    }
+
+    public List<StudioTypes> getStudioTypes() {
+        return studioTypes;
+    }
+
+    public void setStudioTypes(List<StudioTypes> studioTypes) {
+        this.studioTypes = studioTypes;
     }
 
     public Integer getStid() {
@@ -57,6 +67,7 @@ public class StudioTypes {
                 ", Stname='" + Stname + '\'' +
                 ", sLevel=" + sLevel +
                 ", studios=" + studios +
+                ", studioTypes=" + studioTypes +
                 '}';
     }
 }

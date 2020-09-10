@@ -39,4 +39,16 @@ public class LeavlMessageService {
         }
         return leavMessages;
     }
+    public int add(LeavMessage leavMessage){
+        return leavlMessageDao.add(leavMessage);
+    }
+    public int reply(LeavMessage leavMessage){
+        return leavlMessageDao.reply(leavMessage);
+    }
+    public int delBylid(Integer lid){
+        return leavlMessageDao.delBylid(lid);
+    }
+    public int updatestate(Integer lid){
+        return leavlMessageDao.updatestate(lid);
+    }
 }

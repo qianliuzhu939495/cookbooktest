@@ -1,10 +1,7 @@
 package com.cookbook.dao;
 
 import com.cookbook.entity.*;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -16,7 +13,7 @@ public interface StudioDao {
     List<StudioTypes> queryTypes();
 
     @Select("select * from studiotypes where sLevel=#{sLevel}")
-    List<StudioTypes> queryChildrenTypes(String sLevel);
+        List<StudioTypes> queryChildrenTypes(String sLevel);
 
     @Insert("insert into studio(sname,money,stid,uid,stupic,info,uptime) values(#{sname},#{money},#{stid},#{uid},#{stupic},#{info},NOW())")
     Integer saveStudio(Studio studio);
@@ -51,4 +48,27 @@ public interface StudioDao {
     public List<Studio_message> queryMyStudioMessage(String uid);
     @Update("update studio_message set state=1 where smid=#{smid}")
     int updatemessageBysmid(String smid);
+
+    @Select("SELECT * FROM Studio ORDER BY UpTime desc LIMIT 9")
+    public List<Studio> querynewStudio();
+    @Select("SELECT *,(SELECT ROUND(AVG(sm.Start),2) from studio_message sm where sm.sid=s.sid) pingjun from studio s ORDER BY pingjun desc LIMIT 9")
+    public List<Studio> queryOrderBystart();
+
+    @Select("select count(uid) from user_studio where uid=#{param1} and sid=#{param2}")
+    int queryLikeStudio(String uid,String sid);
+    @Delete("delete from user_studio where uid=#{param1} and sid=#{param2}")
+    int deleteLikeStudio(String uid,String sid);
+    @Insert("insert into user_studio values(#{param1},#{param2},NOW())")
+    int saveLikeStudio(String uid,String sid);
+    @Select("select * FROM Studio")
+    List<Studio> queryall();
+    @Select("select * FROM Studio where stid=#{stid}")
+    List<Studio> queryByStid(Integer stid);
+
+
+    // 添加我购买的 和 他卖出的
+    @Insert("insert into userturnover(uid,wid,pay,income,madetime) values(#{param1},#{param2},#{param3},0,NOW())")
+    int savePay(String uid,String sid,double pay);
+    @Insert("insert into userturnover(uid,wid,pay,income,madetime) values(#{param1},#{param2},0,#{param3},NOW())")
+    int saveIncome(String uid,String sid,double income);
 }

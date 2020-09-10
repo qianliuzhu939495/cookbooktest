@@ -57,4 +57,16 @@ public class WorksService {
         work.setWorks_messages(messages);
         return work;
     }
+    public List<Works> queryGuanzhuWorks(Integer uid){
+        List<Works> works = worksDao.queryGuanzhuWorks(uid);
+        for (Works work:works){
+            Users user = userDao.querybyid(work.getUid());
+            work.setUser(user);
+            List<Users> users = worksDao.querystartBywid(work.getWid());
+            work.setStartUsers(users);
+            List<Works_message> messages = worksDao.queryworksmessage(work.getWid());
+            work.setWorks_messages(messages);
+        }
+        return works;
+    }
 }

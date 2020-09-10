@@ -3,6 +3,7 @@ package com.cookbook.dao;
 import com.cookbook.entity.Users;
 import com.cookbook.entity.Works;
 import com.cookbook.entity.Works_message;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -37,4 +38,14 @@ public interface WorksDao {
     List<Works_message> queryMyWorksMessage(String uid);
     @Select("select * from Works where wid=#{wid}")
     public Works queryByWid(Integer wid);
+
+    //点赞与取消 查询增删
+    @Select("select count(uid) from works_start where wid=#{param1} and uid=#{param2}")
+    int queryUserlikework(String wid,String uid);
+    @Delete("delete from works_start where wid=#{param1} and uid=#{param2}")
+    int deletelikework(String wid,String uid);
+    @Insert("insert into works_start values(#{param1},#{param2},0)")
+    int saveLikeWork(String wid,String uid);
+    @Select("SELECT * from works w LEFT JOIN users u on u.uid=w.uid LEFT JOIN user_user uu on uu.followuid=u.uid WHERE uu.uid=#{uid}")
+    List<Works> queryGuanzhuWorks(Integer uid);
 }

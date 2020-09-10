@@ -53,4 +53,31 @@ public class WorksController {
     public List<Users> queryStateBywid(String wid){
         return worksDao.querystartBywid(Integer.parseInt(wid));
     }
+
+    @RequestMapping("queryLikes")
+    public Integer queryLikes(String wid,String uid){
+
+        return worksDao.queryUserlikework(wid,uid);
+    }
+
+    @RequestMapping("updateLike")
+    public Integer updateLike(String wid,String uid){
+        try {
+            int i = worksDao.queryUserlikework(wid, uid);
+            if(i>0){
+                worksDao.deletelikework(wid,uid);
+                return 0;
+            }else{
+                worksDao.saveLikeWork(wid,uid);
+                return 1;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 1;
+    }
+    @RequestMapping("queryGuanzhuWorks")
+    public List<Works> queryGuanzhuWorks(Integer uid){
+        return worksService.queryGuanzhuWorks(uid);
+    }
 }

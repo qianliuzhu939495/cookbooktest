@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="showapi_sdk_java">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../材料/api/showapi_sdk_java-master/showapi_sdk_java-master/showapi_sdk_java.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

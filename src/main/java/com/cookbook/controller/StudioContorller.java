@@ -1,10 +1,12 @@
 package com.cookbook.controller;
 
 import com.cookbook.dao.StudioDao;
+import com.cookbook.dao.Studio_MessageDao;
 import com.cookbook.dao.UserDao;
 import com.cookbook.entity.Studio;
 import com.cookbook.entity.StudioTypes;
 import com.cookbook.entity.Studio_message;
+import com.cookbook.entity.UserTurnover;
 import com.cookbook.service.StudioService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,8 @@ public class StudioContorller {
     UserDao userDao;
     @Resource
     StudioService studioService;
+    @Resource
+    Studio_MessageDao studio_messageDao;
     @RequestMapping("queryTypes")
     public List<StudioTypes> queryTypes(){
         return studioDao.queryTypes();
@@ -92,5 +96,59 @@ public class StudioContorller {
     @RequestMapping("updatemessageBysmid")
     public int updatemessageBysmid(String smid){
         return studioDao.updatemessageBysmid(smid);
+    }
+    @RequestMapping("querynewStudio")
+    public List<Studio> querynewStudio(){
+
+        return studioDao.querynewStudio();
+    }
+    @RequestMapping("queryOrderBystart")
+    public List<Studio> queryOrderBystart(){
+
+        return studioDao.queryOrderBystart();
+    }
+    @RequestMapping("queryAvg")
+    public Integer queryAvg(Integer sid){
+        Integer avg = studio_messageDao.queryAvg(sid);
+        if (avg==null){
+            return 0;
+        }
+        System.out.println(avg);
+        return avg;
+    }
+    @RequestMapping("queryPaysByids")
+    public String  queryPaysByid(String uid,String sid){
+        System.out.println(uid+sid);
+        UserTurnover userTurnover = studioDao.queryPaysByid(uid, sid);
+        System.out.println("userTurnover"+userTurnover);
+        return userTurnover==null?"no":"yes";
+    }
+    @RequestMapping("queryMyLikes")
+    public int queryMyLikes(String uid,String sid){
+        return studioDao.queryLikeStudio(uid,sid);
+    }
+    @RequestMapping("updateMyLikes")
+    public int updateMyLikes(String uid,String sid){
+        try {
+            int i = studioDao.queryLikeStudio(uid, sid);
+            if(i>0){
+                studioDao.deleteLikeStudio(uid,sid);
+                return 0;
+            }else{
+                studioDao.saveLikeStudio(uid,sid);
+                return 1;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 1;
+    }
+    @RequestMapping("queryall")
+    public List<Studio> queryall(){
+        return studioDao.queryall();
+    }
+    @RequestMapping("queryByStid")
+    public List<Studio> queryByStid(Integer stid){
+        return studioDao.queryByStid(stid);
     }
 }

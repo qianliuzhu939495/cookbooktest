@@ -32,4 +32,8 @@ public class UController {
     public Users queryUser(Integer uid){
         return userService.queryUser(uid);
     }
+    @RequestMapping("queryMeiShiZuoJia")
+    public List<Users> queryMeiShiZuoJia(){
+        return userService.queryMeiShiZuoJia();
+    }
 }
