@@ -76,4 +76,8 @@ public class WorksController {
         }
         return 1;
     }
+    @RequestMapping("queryGuanzhuWorks")
+    public List<Works> queryGuanzhuWorks(Integer uid){
+        return worksService.queryGuanzhuWorks(uid);
+    }
 }

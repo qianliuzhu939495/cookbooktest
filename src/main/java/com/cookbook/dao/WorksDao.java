@@ -46,4 +46,6 @@ public interface WorksDao {
     int deletelikework(String wid,String uid);
     @Insert("insert into works_start values(#{param1},#{param2},0)")
     int saveLikeWork(String wid,String uid);
+    @Select("SELECT * from works w LEFT JOIN users u on u.uid=w.uid LEFT JOIN user_user uu on uu.followuid=u.uid WHERE uu.uid=#{uid}")
+    List<Works> queryGuanzhuWorks(Integer uid);
 }
