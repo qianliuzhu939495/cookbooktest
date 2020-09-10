@@ -40,7 +40,6 @@ public class BackReportFormService {
     public String ReportFormIncomeYear(){//年收入
         List<Map<String, Object>> lists = backReportFormDao.ReportFormIncomeYear();
         List<Map<String,Object>> newList = new ArrayList<>();
-        System.out.println(lists);
         if(lists.get(0) != null){
             for (int i= 0;i<lists.size();i++){
                 Map<String,Object> maps = new HashMap<>();
