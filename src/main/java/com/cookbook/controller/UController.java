@@ -17,23 +17,23 @@ public class UController {
     @Resource
     UserService userService;
     @RequestMapping("queryuserinfo")
-    public List<Users> queryuserinfo(){
+    public List<Users> queryuserinfo() throws Exception {
         return userService.queryuserinfo();
     }
     @RequestMapping("queryBylikeUname")
-    public List<Users> queryBylikeUname(String uname){
+    public List<Users> queryBylikeUname(String uname) throws Exception {
         return userService.queryBylikeUname(uname);
     }
     @RequestMapping("querybyid")
-    public Users querybyid(Integer uid){
+    public Users querybyid(Integer uid) throws Exception {
         return userService.querybyuid(uid);
     }
     @RequestMapping("queryUser")
-    public Users queryUser(Integer uid){
+    public Users queryUser(Integer uid) throws Exception {
         return userService.queryUser(uid);
     }
     @RequestMapping("queryMeiShiZuoJia")
-    public List<Users> queryMeiShiZuoJia(){
+    public List<Users> queryMeiShiZuoJia() throws Exception {
         return userService.queryMeiShiZuoJia();
     }
 }

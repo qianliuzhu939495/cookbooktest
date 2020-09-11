@@ -49,7 +49,7 @@ public class FileUpload {
     String sqlPic="";
     List sts = new ArrayList<String>();
     @RequestMapping("upStudios")
-    public String upStudios(@RequestParam("newStudio") String newStudio,@RequestParam("studioDetail") String studioDetail){
+    public String upStudios(@RequestParam("newStudio") String newStudio,@RequestParam("studioDetail") String studioDetail) throws Exception {
         System.out.println(newStudio);
         System.out.println(studioDetail);
         System.out.println(sqlPic);
@@ -70,7 +70,7 @@ public class FileUpload {
         return "ok";
     }
     @RequestMapping("uploads")
-    public String upload(@RequestParam("file1") MultipartFile[] studiopic) throws IOException {
+    public String upload(@RequestParam("file1") MultipartFile[] studiopic) throws Exception {
         sqlPic="";
         MultipartFile s=studiopic[0];
         // 原文件名
@@ -88,7 +88,7 @@ public class FileUpload {
         return "ok";
     }
     @RequestMapping("studiosVideo")
-    public String studiosVideo(@RequestParam("file2") MultipartFile[] video) throws IOException {
+    public String studiosVideo(@RequestParam("file2") MultipartFile[] video) throws Exception {
         sts = new ArrayList<String>();
         System.out.println(video.length);
         for (MultipartFile s:video) {
@@ -149,7 +149,7 @@ public class FileUpload {
     }
     @RequestMapping("uploadImage")
     @ResponseBody
-    public String uploadImage(@RequestParam("file2") MultipartFile[] image ) throws IOException {
+    public String uploadImage(@RequestParam("file2") MultipartFile[] image ) throws Exception {
         sts = new ArrayList<String>();
         for(MultipartFile file:image){
             String originalFilename = file.getOriginalFilename();
@@ -171,7 +171,7 @@ public class FileUpload {
     }
     @RequestMapping("uploadpic")
     @ResponseBody
-    public String uploadpic(@RequestParam("file1") MultipartFile file1) throws IOException {
+    public String uploadpic(@RequestParam("file1") MultipartFile file1) throws Exception {
         sqlPic="";
         String pics = file1.getOriginalFilename();
         if(null != pics && !"".equals(pics)){
@@ -187,7 +187,7 @@ public class FileUpload {
     }
     @RequestMapping("uploaduserPicsql")
     @ResponseBody
-    public String uploaduserPicsql(@RequestParam("uid") String uid) throws IOException {
+    public String uploaduserPicsql(@RequestParam("uid") String uid) throws Exception {
         userDao.updateUserpic(sqlPic,uid);
         return sqlPic;
     }

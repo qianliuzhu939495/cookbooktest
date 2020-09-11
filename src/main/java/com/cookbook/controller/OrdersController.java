@@ -2,7 +2,9 @@ package com.cookbook.controller;
 
 import com.cookbook.dao.StudioDao;
 import com.cookbook.dao.UserDao;
+import com.cookbook.dao.UserTurnoverDao;
 import com.cookbook.entity.Studio;
+import com.cookbook.entity.UserTurnover;
 import com.cookbook.util.AlipayConfig;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @CrossOrigin
 @Controller
@@ -56,6 +59,32 @@ public class OrdersController {
       }
       return 0;
    }
+    @Resource
+    UserTurnoverDao userTurnoverDao;
+    @RequestMapping("queryMypincome")
+    @ResponseBody
+    public List<UserTurnover> queryMypincome(String uid){
+        try {
+            // 添加我购买的 和 他卖出的
+            List<UserTurnover> userTurnovers = userTurnoverDao.queryMyincome(uid);
+            return userTurnovers;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @RequestMapping("querymypay")
+    @ResponseBody
+    public List<UserTurnover> querymypay(String uid){
+        try {
+            // 添加我购买的 和 他卖出的
+            List<UserTurnover> userTurnovers = userTurnoverDao.querymypay(uid);
+            return userTurnovers;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
    @RequestMapping("pay")
    @ResponseBody
     public void pay(String order_number,String bnbname,String order_price,String sid,String state, HttpServletRequest request, HttpServletResponse response) throws IOException{
