@@ -1,5 +1,6 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.MenuTypesDao;
 import com.cookbook.entity.MenuTypes;
 import com.cookbook.service.MenuTypesService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,8 @@ import java.util.List;
 public class MenuTypesController {
     @Resource
     MenuTypesService menuTypesService;
+    @Resource
+    MenuTypesDao menuTypesDao;
     @RequestMapping("queryall")
     public List<MenuTypes> queryall(){
         return menuTypesService.queryall();
@@ -22,5 +25,9 @@ public class MenuTypesController {
     @RequestMapping("querybymtid")
     public MenuTypes querybymtid(Integer mtid){
         return menuTypesService.querybymtid(mtid);
+    }
+    @RequestMapping("queryBymlevel")
+    public List<MenuTypes> queryBymlevel(Integer mlevel){
+        return menuTypesDao.querybymlevel(mlevel);
     }
 }

@@ -3,9 +3,12 @@ package com.cookbook.controller;
 import com.cookbook.dao.MenuDao;
 import com.cookbook.entity.LeavMessage;
 import com.cookbook.dao.MenuStepsDao;
+import com.cookbook.entity.MaterialsDetail;
 import com.cookbook.entity.Menu;
+import com.cookbook.entity.MenuStep;
 import com.cookbook.service.MenuService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -87,6 +90,23 @@ public class MenuController {
            e.printStackTrace();
        }
        return 1;
+    }
+    @RequestMapping("queryMenudetailBymid")
+    public Menu queryMenudetailBymid(Integer mid){
+
+        return menuService.queryMenudetailBymid(mid);
+    }
+    @RequestMapping("updateMenus")
+    public int updateMenus(@RequestBody Menu menu){
+        //添加菜谱 详情 步骤
+        return menuService.updateMenus(menu);
+
+    }
+    @RequestMapping("deleteMenu")
+    public int deleteMenu(String mid){
+        //添加菜谱 详情 步骤
+        return menuService.deleteMenu(mid);
+
     }
 
 }

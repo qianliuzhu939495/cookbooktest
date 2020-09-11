@@ -141,4 +141,45 @@ public class MenuService {
         }
         return menus;
     }
+    public Menu queryMenudetailBymid(Integer mid){
+        Menu menu = menuDao.querybymid(mid);
+        List<Works> works = worksDao.querybymid(menu.getMid());
+        menu.setWorks(works);
+        List<MaterialsDetail> materialsDetails = materialsDetailDao.queryBymid(menu.getMid());
+        menu.setMaterialsDetails(materialsDetails);
+        List<MenuStep> menuSteps = menuStepsDao.queryBymid(menu.getMid());
+        menu.setMenuSteps(menuSteps);
+        return menu;
+
+    }
+    public int updateMenus(Menu menu){
+        //添加菜谱 详情 步骤
+        try {
+            menuDao.updatemenuBymid(menu);
+            for(MaterialsDetail md:menu.getMaterialsDetails()){
+                menuDao.updatematerialsdetail(md);
+            }
+            for(MenuStep ms:menu.getMenuSteps()){
+                menuDao.updatemenustep(ms);
+            }
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+
+    }
+    public int deleteMenu(String mid){
+        try {
+            menuDao.deleteMessage(mid);
+            menuDao.deletemenustep(mid);
+            menuDao.deletematerialsdetail(mid);
+            menuDao.deletemenuBymid(mid);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+
+    }
 }
