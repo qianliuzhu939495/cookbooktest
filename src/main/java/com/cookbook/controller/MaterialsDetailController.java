@@ -16,7 +16,7 @@ public class MaterialsDetailController {
     @Resource
     MaterialsDetailService materialsDetailService;
     @RequestMapping("queryBymid")
-    public List<MaterialsDetail> queryBymid(Integer mid){
+    public List<MaterialsDetail> queryBymid(Integer mid) throws Exception {
         return materialsDetailService.queryBymid(mid);
     }
 }

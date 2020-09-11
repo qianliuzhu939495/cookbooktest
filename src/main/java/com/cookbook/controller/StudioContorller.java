@@ -151,4 +151,8 @@ public class StudioContorller {
     public List<Studio> queryByStid(Integer stid){
         return studioDao.queryByStid(stid);
     }
+    @RequestMapping("queryByid")
+    public Studio queryByid(String sid){
+        return studioDao.queryByid(sid);
+    }
 }

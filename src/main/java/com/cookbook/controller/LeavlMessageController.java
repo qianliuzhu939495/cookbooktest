@@ -18,31 +18,31 @@ public class LeavlMessageController {
     @Resource
     LeavlMessageService leavlMessageService;
     @RequestMapping("querymessageBymid")
-    public List<LeavMessage> querymessageBymid(Integer mid){
+    public List<LeavMessage> querymessageBymid(Integer mid)  throws Exception {
         return leavlMessageService.querymessageBymid(mid);
     }
     @RequestMapping("querymessagereplyNonull")
-    public List<LeavMessage> querymessagereplyNonull(Integer mid){
+    public List<LeavMessage> querymessagereplyNonull(Integer mid) throws Exception {
         return leavlMessageService.querymessagereplyNonull(mid);
     }
     @RequestMapping("querymessageNull")
-    public List<LeavMessage> querymessageNull(Integer mid){
+    public List<LeavMessage> querymessageNull(Integer mid) throws Exception {
         return leavlMessageService.querymessageNull(mid);
     }
     @RequestMapping("add")
-    public int add(@RequestBody LeavMessage leavMessage){
+    public int add(@RequestBody LeavMessage leavMessage) throws Exception {
         return leavlMessageService.add(leavMessage);
     }
     @RequestMapping("reply")
-    public int reply(@RequestBody LeavMessage leavMessage){
+    public int reply(@RequestBody LeavMessage leavMessage) throws Exception {
         return leavlMessageService.reply(leavMessage);
     }
     @RequestMapping("delBylid")
-    public int delBylid(Integer lid){
+    public int delBylid(Integer lid) throws Exception {
         return leavlMessageService.delBylid(lid);
     }
     @RequestMapping("updatestate")
-    public int updatestate(Integer lid){
+    public int updatestate(Integer lid) throws Exception {
         return leavlMessageService.updatestate(lid);
     }
 }

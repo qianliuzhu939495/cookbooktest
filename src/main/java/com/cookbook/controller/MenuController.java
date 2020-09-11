@@ -27,6 +27,11 @@ public class MenuController {
     public List<Menu> queryThisMonth(){
         return menuService.queryThisMonth();
     }
+
+    @RequestMapping("deletemenuBymid")
+    public Integer deletemenuBymid(String mid){
+        return menuDao.deletemenuBymid(mid);
+    }
     @RequestMapping("queryupMonth")
     public List<Menu> queryupMonth(){
         return menuService.queryupMonth();

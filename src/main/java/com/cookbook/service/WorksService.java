@@ -2,6 +2,7 @@ package com.cookbook.service;
 
 import com.cookbook.dao.UserDao;
 import com.cookbook.dao.WorksDao;
+import com.cookbook.dao.Works_messageDao;
 import com.cookbook.entity.Users;
 import com.cookbook.entity.Works;
 import com.cookbook.entity.Works_message;
@@ -16,6 +17,8 @@ public class WorksService {
     WorksDao worksDao;
     @Resource
     UserDao userDao;
+    @Resource
+    Works_messageDao works_messageDao;
     public List<Works> querybymid(Integer mid){
         List<Works> works = worksDao.queryBystartcount(mid);
         for (Works work:works){
@@ -80,5 +83,17 @@ public class WorksService {
             work.setWorks_messages(messages);
         }
         return works;
+    }
+
+    public int deleteWorks(String wid){
+        try {
+            works_messageDao.deleteByWid(wid);
+            worksDao.deleteworkstart(wid);
+            worksDao.deleteWorks(wid);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

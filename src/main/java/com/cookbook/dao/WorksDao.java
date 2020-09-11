@@ -3,10 +3,7 @@ package com.cookbook.dao;
 import com.cookbook.entity.Users;
 import com.cookbook.entity.Works;
 import com.cookbook.entity.Works_message;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -51,4 +48,11 @@ public interface WorksDao {
 
     @Select("SELECT * from works")
     List<Works> queryAllWorks();
+
+    @Update("update works set winfo=#{winfo},pic=#{pic} where wid=#{wid}")
+    int updateWorks(Works works);
+    @Delete("delete from works where wid=#{wid}")
+    int deleteWorks(String wid);
+    @Delete("delete from works_start where wid=#{wid}")
+    int deleteworkstart(String wid);
 }

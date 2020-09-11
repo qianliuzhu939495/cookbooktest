@@ -110,7 +110,7 @@ public class Userscontroller {
     }
     @RequestMapping("studioQueryuser")
     @ResponseBody //查询课程作者
-    public Users studioQueryuser(String uid){
+    public Users studioQueryuser(String uid) throws Exception{
         System.out.println(uid);
         Users querybyid = userDao.querybyid(Integer.valueOf(uid));
         System.out.println(querybyid);
