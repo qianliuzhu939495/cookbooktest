@@ -80,4 +80,14 @@ public class WorksController {
     public List<Works> queryGuanzhuWorks(Integer uid){
         return worksService.queryGuanzhuWorks(uid);
     }
+
+    @RequestMapping("updateWorks")
+    public int updateWorks(@RequestBody Works works){
+        return worksDao.updateWorks(works);
+    }
+
+    @RequestMapping("deleteWorks")
+    public int deleteWorks(String wid){
+        return worksService.deleteWorks(wid);
+    }
 }

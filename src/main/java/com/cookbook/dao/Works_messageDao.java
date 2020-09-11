@@ -17,4 +17,6 @@ public interface Works_messageDao {
     int delByupid(Integer wmid);
     @Update("update Works_message set state=1 where wmid=#{wmid}")
     int updateworkstate(String wmid);
+    @Delete("delete from Works_message where wid=#{wid}")
+    int deleteByWid(String wid);
 }
