@@ -30,7 +30,7 @@ import java.util.UUID;
 @RequestMapping("file")
 public class FileUpload {
     // 获取配置文件中的属性值
-    @Value("${pic.picturePath}") //图片
+    @Value("${pic.webPath}") //图片
     String picturePath;
     @Value("${pic.savePath}")
     String savePath;
