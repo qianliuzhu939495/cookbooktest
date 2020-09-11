@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface backstage_UsersDao {
     @Select("select * from users")
-    public List<Users> queryUsers();
+    List<Users> queryUsers();
     @Update("update users set state = #{state} where uid = #{uid}")
     int updateUsers(@Param("state") Integer state, @Param("uid") Integer uid);
     @Insert("insert into users(uname,Pwd,createTime,state) " +

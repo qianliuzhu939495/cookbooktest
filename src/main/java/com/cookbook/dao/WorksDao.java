@@ -13,11 +13,11 @@ import java.util.List;
 @Mapper
 public interface WorksDao {
     @Select("select * from Works where Mid=#{mid}")
-    public List<Works> querybymid(Integer mid);
+    List<Works> querybymid(Integer mid);
     @Select("select * from Works where uid=#{uid}")
-    public List<Works> querybyuid(Integer uid);
+    List<Works> querybyuid(Integer uid);
     @Select("select * from Works where uid=#{uid} ORDER BY MakeTime DESC")
-    public List<Works> querybyuidtwo(Integer uid);
+    List<Works> querybyuidtwo(Integer uid);
     @Select("select * from Works_message where Wid=#{wid}")
     List<Works_message> queryworksmessage(Integer wid);
     @Select("select u.* from Works_start ws left join users u on ws.uid=u.uid where ws.Wid=#{wid}")
@@ -31,13 +31,13 @@ public interface WorksDao {
             ") count from Works w where w.Mid=#{mid} ORDER BY count DESC")
     List<Works> queryBystartcount(Integer mid);
     @Select("select * from Works where mid=#{mid} ORDER BY MakeTime DESC")
-    public List<Works> queryOrderBytime(Integer mid);
+    List<Works> queryOrderBytime(Integer mid);
 
     //查询我的所有作品的维度评论
     @Select("select * from works_message wm inner join works w on wm.wid=w.wid where w.uid=#{uid} and wm.state=0")
     List<Works_message> queryMyWorksMessage(String uid);
     @Select("select * from Works where wid=#{wid}")
-    public Works queryByWid(Integer wid);
+    Works queryByWid(Integer wid);
 
     //点赞与取消 查询增删
     @Select("select count(uid) from works_start where wid=#{param1} and uid=#{param2}")

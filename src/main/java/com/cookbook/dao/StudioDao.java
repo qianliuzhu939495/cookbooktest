@@ -45,14 +45,14 @@ public interface StudioDao {
     UserTurnover queryPaysByid(String uid,String wid);
     //查询我的所有视频的所有未读评论
     @Select("select sm.* from studio_message sm inner join studio s on sm.sid=s.sid where s.uid=#{uid} and sm.state=0")
-    public List<Studio_message> queryMyStudioMessage(String uid);
+    List<Studio_message> queryMyStudioMessage(String uid);
     @Update("update studio_message set state=1 where smid=#{smid}")
     int updatemessageBysmid(String smid);
 
     @Select("SELECT * FROM Studio ORDER BY UpTime desc LIMIT 9")
-    public List<Studio> querynewStudio();
+    List<Studio> querynewStudio();
     @Select("SELECT *,(SELECT ROUND(AVG(sm.Start),2) from studio_message sm where sm.sid=s.sid) pingjun from studio s ORDER BY pingjun desc LIMIT 9")
-    public List<Studio> queryOrderBystart();
+    List<Studio> queryOrderBystart();
 
     @Select("select count(uid) from user_studio where uid=#{param1} and sid=#{param2}")
     int queryLikeStudio(String uid,String sid);

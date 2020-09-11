@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface StudioTypeDao {
     @Select("select * from StudioTypes where sLevel=#{slevel}")
-    public List<StudioTypes> querybyslevel(Integer slevel);
+    List<StudioTypes> querybyslevel(Integer slevel);
 }
