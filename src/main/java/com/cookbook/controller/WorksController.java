@@ -80,4 +80,8 @@ public class WorksController {
     public List<Works> queryGuanzhuWorks(Integer uid){
         return worksService.queryGuanzhuWorks(uid);
     }
+    @RequestMapping("queryAllWorks")
+    public List<Works> queryAllWorks(){
+        return worksService.queryAllWorks();
+    }
 }

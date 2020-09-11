@@ -69,4 +69,16 @@ public class WorksService {
         }
         return works;
     }
+    public List<Works> queryAllWorks(){
+        List<Works> works = worksDao.queryAllWorks();
+        for (Works work:works){
+            Users user = userDao.querybyid(work.getUid());
+            work.setUser(user);
+            List<Users> users = worksDao.querystartBywid(work.getWid());
+            work.setStartUsers(users);
+            List<Works_message> messages = worksDao.queryworksmessage(work.getWid());
+            work.setWorks_messages(messages);
+        }
+        return works;
+    }
 }
