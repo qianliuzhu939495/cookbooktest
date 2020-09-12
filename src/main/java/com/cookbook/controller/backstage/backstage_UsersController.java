@@ -9,20 +9,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Controller
+@Controller //用于标记一个类，使用它标记的类就是一个SpringMVC Controller 对象，即一个控制器类
 @RequestMapping("backstage_users")
 public class backstage_UsersController {
-    @Resource
-    backstage_UsersService usersService;
-    @RequestMapping("queryUsers")
-    @ResponseBody
+    @Resource //属于J2EE的 默认按照名称进行装配，名称可以通过name属性进行指定，减少了与spring的耦合
+            backstage_UsersService usersService;
+    @RequestMapping("queryUsers")//RequestMapping 处理请求地址映射 窄化路径
+    @ResponseBody//@ResponseBody的作用其实是异步请求时将java对象转为json格式的数据。
     public List<Users> queryUsers(){
         return usersService.queryUsers();
     }
     @RequestMapping("updateUsers")
-    @ResponseBody()
+    @ResponseBody
     public Integer updateUsers(Integer state, Integer uid){
-        System.out.println(state);
         return usersService.updateUsers(state, uid);
     }
     @ResponseBody

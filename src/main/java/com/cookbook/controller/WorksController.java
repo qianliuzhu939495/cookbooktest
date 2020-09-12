@@ -1,5 +1,6 @@
 package com.cookbook.controller;
 
+import com.cookbook.dao.UserDao;
 import com.cookbook.dao.WorksDao;
 import com.cookbook.entity.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -93,5 +94,12 @@ public class WorksController {
     @RequestMapping("deleteWorks")
     public int deleteWorks(String wid){
         return worksService.deleteWorks(wid);
+    }
+    @Resource
+    UserDao userDao;
+    @RequestMapping("queryMyWorksByid")
+    public List<Menu> queryMyWorksByid(String uid){
+        List<Menu> menus1 = userDao.queryLikemenu(Integer.parseInt(uid));
+        return menus1;
     }
 }

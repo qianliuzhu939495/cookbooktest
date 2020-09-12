@@ -30,7 +30,7 @@ public interface BackReportFormDao {
     //报表本年菜谱种类
     @Select("select count(m.Mtid)'count',\n" +
             "(select mes.Mtname from menutypes mes where mes.Mtid = ms.mLevel)'Mtnames'\n" +
-            " from works w left join menu m on w.Mid = m.Mid left join menutypes ms on m.Mtid = ms.Mtid where YEAR(w.MakeTime)=YEAR(NOW()) group by m.Mtid")
+            " from works w inner join menu m on w.Mid = m.Mid inner join menutypes ms on m.Mtid = ms.Mtid where YEAR(w.MakeTime)=YEAR(NOW()) group by m.Mtid")
     List<Map<String,Object>> ReportFormMenuYear();
 
     //报表本年菜谱

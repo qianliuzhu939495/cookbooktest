@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-
+//表示这是个业务层类
 @Service
 public class LoginService {
+    //Resource默认按byName自动注入loginDao
     @Resource
     LoginDao loginDao;
     public Customer Login(String Lognum,String Pwd){

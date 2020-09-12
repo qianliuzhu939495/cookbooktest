@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service
+@Service//自动注册到Spring容器
 public class backstage_UsersService {
-    @Resource
-    backstage_UsersDao usersDao;
+    @Resource //属于J2EE的 默认按照名称进行装配，名称可以通过name属性进行指定，减少了与spring的耦合
+            backstage_UsersDao usersDao;
     public List<Users> queryUsers(){
         return usersDao.queryUsers();
     }

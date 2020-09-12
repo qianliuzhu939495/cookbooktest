@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+//支持跨域
 @CrossOrigin
+//所有方法都是局部返回，默认返回json
 @RestController
+//窄化路径，限制只能backstage访问此类
 @RequestMapping("backstage")
 public class LoginController {
+    //按照byName自动注入loginservice
     @Resource
     LoginService loginService;
+
     @RequestMapping("Login")
     public Customer login(String Lognum,String Pwd){
         System.out.println(loginService.Login(Lognum, Pwd));
