@@ -60,12 +60,14 @@ public class UserService {
     public Users queryByphone(String phone){
         Users users = ud.queryByMsg(phone);
         if(null==users){
-            ud.sasveone(UUID.randomUUID().toString().replaceAll("-", ""),phone);
+            ud.sasveone(UUID.randomUUID().toString().replaceAll("-", "").substring(0,5),phone);
         }
         users = ud.queryByMsg(phone);
         Integer uid = users.getUid();
         users.setUsers(ud.queryguanzhu(uid));
         users.setFollows(ud.querybeiguanzhu(uid));
+        List<Menu> menus1 = ud.queryLikemenu(uid);
+        users.setUser_menus(menus1);
         users.setUser_studios(ud.queryLikestudios(uid));
         List<Menu> menus = menuDao.querybyuid(uid);
         for(Menu m:menus){
@@ -83,32 +85,43 @@ public class UserService {
         return users;
     }
     public Users queryByMsg(String phone){
-        Users users = ud.queryByMsg(phone);
-        Integer uid = users.getUid();
-        users.setUsers(ud.queryguanzhu(uid));
-        users.setFollows(ud.querybeiguanzhu(uid));
-        users.setUser_studios(ud.queryLikestudios(uid));
-        List<Menu> menus = menuDao.querybyuid(uid);
-        for(Menu m:menus){
-            m.setWorks(worksDao.querybymid(m.getMid()));
-            m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
-        }
-        users.setMunus(menus);
-        List<Works> works = worksDao.querybyuidtwo(uid);
-        for(Works w:works){
-            w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
-            w.setStartUsers(worksDao.querystartBywid(w.getWid()));
-        }
-        users.setWorks(works);        users.setMystudio(studioOrder.queryBypay(uid));
-        users.setMystudio(studioOrder.queryByincome(uid));
-        return users;
+
+       try {
+           Users users = ud.queryByMsg(phone);
+           if(null==users){
+               return null;
+           }
+           Integer uid = users.getUid();
+           users.setUsers(ud.queryguanzhu(uid));
+           users.setFollows(ud.querybeiguanzhu(uid));
+           List<Menu> menus1 = ud.queryLikemenu(uid);
+           users.setUser_menus(menus1);
+           users.setUser_studios(ud.queryLikestudios(uid));
+           List<Menu> menus = menuDao.querybyuid(uid);
+           for(Menu m:menus){
+               m.setWorks(worksDao.querybymid(m.getMid()));
+               m.setLeavMessages(leavlMessageDao.querymessageBymid(m.getMid()));
+           }
+           users.setMunus(menus);
+           List<Works> works = worksDao.querybyuidtwo(uid);
+           for(Works w:works){
+               w.setWorks_messages(worksDao.queryworksmessage(w.getWid()));
+               w.setStartUsers(worksDao.querystartBywid(w.getWid()));
+           }
+           users.setWorks(works);        users.setMystudio(studioOrder.queryBypay(uid));
+           users.setMystudio(studioOrder.queryByincome(uid));
+           return users;
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+        return null;
 
     }
     public Integer sasveone(String phone){
-        return ud.sasveone(UUID.randomUUID().toString().replaceAll("-", ""),phone);
+        return ud.sasveone(UUID.randomUUID().toString().replaceAll("-", "").substring(0,5),phone);
     }
     public Integer sasveoneRe(String pwd,String phone){
-        return ud.sasveoneRe(UUID.randomUUID().toString().replaceAll("-", ""),pwd,phone);
+        return ud.sasveoneRe(UUID.randomUUID().toString().replaceAll("-", "").substring(0,5),pwd,phone);
     }
     public List<Users> queryAll(){
         return ud.queryAll();

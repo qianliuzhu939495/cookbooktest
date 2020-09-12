@@ -9,6 +9,7 @@ import java.util.List;
 public interface StudioDao {
     @Select("select s.* from user_studio us left join studio s on us.sid=s.sid where us.uid=#{uid} ORDER BY us.savetime desc")
     List<Studio> queryusercollectedstudio(Integer uid);
+
     @Select("select * from studiotypes where sLevel=0")
     List<StudioTypes> queryTypes();
 

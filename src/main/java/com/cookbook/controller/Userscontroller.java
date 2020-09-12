@@ -16,7 +16,7 @@ import java.util.Map;
 @CrossOrigin
 @Controller
 public class Userscontroller {
-    int mobile_code=1024;
+    int mobile_code=111111;
     @Resource
     UserService userService;
     @Resource
@@ -55,9 +55,15 @@ public class Userscontroller {
     @ResponseBody
     public Users register(String pwd,String phone){
         System.out.println(phone+","+pwd);
-        userService.sasveoneRe(pwd,phone);
-        Users users = userService.queryByphone(phone);
-        return  users;
+        try {
+            userService.sasveoneRe(pwd,phone);
+            Users users = userService.queryByphone(phone);
+            return  users;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
     }
     @RequestMapping("queryphone")
     @ResponseBody

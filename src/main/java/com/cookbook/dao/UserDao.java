@@ -14,7 +14,7 @@ public interface UserDao {
     Users queryByPwd(String phone,String pwd);
     @Select("select * from users where phone=#{phone}")
     Users queryByMsg(String phone);
-    @Insert("insert into users(uname,pwd,phone,createTime) values(#{param1},'12345',#{param2},now())")
+    @Insert("insert into users(uname,pwd,phone,createTime) values(#{param1},'123456',#{param2},now())")
     Integer sasveone(String uname,String phone);
     @Insert("insert into users(uname,pwd,phone,createTime) values(#{param1},#{param2},#{param3},now())")
     Integer sasveoneRe(String uname,String pwd,String phone);
