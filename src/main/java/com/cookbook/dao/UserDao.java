@@ -14,9 +14,9 @@ public interface UserDao {
     Users queryByPwd(String phone,String pwd);
     @Select("select * from users where phone=#{phone}")
     Users queryByMsg(String phone);
-    @Insert("insert into users(uname,pwd,phone,createTime) values(#{param1},'123456',#{param2},now())")
+    @Insert("insert into users(uname,pwd,pic,phone,createTime) values(#{param1},'123456','logo.jpg',#{param2},now())")
     Integer sasveone(String uname,String phone);
-    @Insert("insert into users(uname,pwd,phone,createTime) values(#{param1},#{param2},#{param3},now())")
+    @Insert("insert into users(uname,pwd,pic,phone,createTime) values(#{param1},#{param2},'logo.jpg',#{param3},now())")
     Integer sasveoneRe(String uname,String pwd,String phone);
     @Select("SELECT *,(SELECT COUNT(*) from works w where w.uid=u.uid) count from users u ORDER BY count desc")
     List<Users> queryAll();
